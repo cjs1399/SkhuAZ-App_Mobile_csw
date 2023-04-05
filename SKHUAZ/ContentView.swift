@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+    @State var isActive: Bool = false
+        @State var loginSuccess = false
     var body: some View {
-        LoginView()
-//        sample()
+        LoginView(loginSuccess: $loginSuccess)
+//        make()
     }
 }
 
