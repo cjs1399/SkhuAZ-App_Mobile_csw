@@ -19,7 +19,7 @@ struct SignUpView: View {
     @State var department: Bool = false // 전공미선택
     @State var major_minor: Bool = true // 주/부전공
     @State var double_major: Bool = false // 복수전공
-//    @State var Semester: Int = 7
+    @State var Semester: Int = 7
     
     @State private var date: String = ""
     @State private var passwordError: String = "비밀번호가 서로 일치하지 않습니다."
@@ -47,62 +47,62 @@ struct SignUpView: View {
     
     @State var MarjorError: String = "선택한 두 전공이 같습니다"
     
-    //    struct ModalView: View {
-    //        @State private var test: String = ""
-    //        @Environment(\.presentationMode) var presentatio
-    //        @State var ShowModel: Bool
-    //        var body: some View {
-    //            Group{
-    //                VStack{
-    //                    HStack{
-    //                        Text("인증번호를 입력해주세요")
-    //                            .foregroundColor(.black)
-    //                        Spacer()
-    //                    }
-    //                    .padding(.leading, 30)
-    //                    VStack(spacing: 0){
-    //                        TextField("인증번호 입력", text: $test)
-    //                            .frame(width: 350, height: 50)
-    //                            .textFieldStyle(.roundedBorder)
-    //                        HStack{
-    //                            Button(action: {
-    //                                // 인증번호 재전송하는 기능
-    //                            }, label: {
-    //                                Image(systemName: "arrow.clockwise")
-    //                                Text("인증코드 재전송")
-    //                            })
-    //                            .foregroundColor(.gray)
-    //                            Spacer()
-    //                        }
-    //                        .padding(.leading, 30)
-    //
-    //                    }
-    //                    HStack{
-    //                        Button(action: {
-    //                            presentatio.wrappedValue.dismiss()
-    //                            self.ShowModel = false
-    //                        }) {
-    //                            Text("취소").bold()
-    //                        }
-    //                        .foregroundColor(.gray)
-    //                        .frame(width: 170, height: 50)
-    //                        .background(Color(uiColor: .secondarySystemBackground))
-    //                        .cornerRadius(10)
-    //                        Button(action: {
-    //                            // 인증번호 확인
-    //                        }) {
-    //                            Text("확인").bold()
-    //                        }
-    //                        .foregroundColor(.white)
-    //                        .frame(width: 170, height: 50)
-    //                        .background(Color(red: 0.603, green: 0.756, blue: 0.819))
-    //                        .cornerRadius(10)
-    //                    }
-    //                }
-    //
-    //            }
-    //        }
-    //    }
+        struct ModalView: View {
+            @State private var test: String = ""
+            @Environment(\.presentationMode) var presentatio
+            @State var ShowModel: Bool
+            var body: some View {
+                Group{
+                    VStack{
+                        HStack{
+                            Text("인증번호를 입력해주세요")
+                                .foregroundColor(.black)
+                            Spacer()
+                        }
+                        .padding(.leading, 30)
+                        VStack(spacing: 0){
+                            TextField("인증번호 입력", text: $test)
+                                .frame(width: 350, height: 50)
+                                .textFieldStyle(.roundedBorder)
+                            HStack{
+                                Button(action: {
+                                    // 인증번호 재전송하는 기능
+                                }, label: {
+                                    Image(systemName: "arrow.clockwise")
+                                    Text("인증코드 재전송")
+                                })
+                                .foregroundColor(.gray)
+                                Spacer()
+                            }
+                            .padding(.leading, 30)
+    
+                        }
+                        HStack{
+                            Button(action: {
+                                presentatio.wrappedValue.dismiss()
+                                self.ShowModel = false
+                            }) {
+                                Text("취소").bold()
+                            }
+                            .foregroundColor(.gray)
+                            .frame(width: 170, height: 50)
+                            .background(Color(uiColor: .secondarySystemBackground))
+                            .cornerRadius(10)
+                            Button(action: {
+                                // 인증번호 확인
+                            }) {
+                                Text("확인").bold()
+                            }
+                            .foregroundColor(.white)
+                            .frame(width: 170, height: 50)
+                            .background(Color(red: 0.603, green: 0.756, blue: 0.819))
+                            .cornerRadius(10)
+                        }
+                    }
+    
+                }
+            }
+        }
     
     var body: some View {
         ScrollView{
@@ -120,12 +120,12 @@ struct SignUpView: View {
                     .cornerRadius(10)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
-                //                Button{} label: {
-                //                    Text("중복확인")
-                //                        .foregroundColor(Color(red: 0.76, green: 0.552, blue: 0.552))
-                //                        .frame(width: 90, height:50)
-                //                        .background(RoundedRectangle(cornerRadius: 10).strokeBorder(Color(red: 0.76, green: 0.552, blue: 0.552)))
-                //                }
+                                Button{} label: {
+                                    Text("중복확인")
+                                        .foregroundColor(Color(red: 0.76, green: 0.552, blue: 0.552))
+                                        .frame(width: 90, height:50)
+                                        .background(RoundedRectangle(cornerRadius: 10).strokeBorder(Color(red: 0.76, green: 0.552, blue: 0.552)))
+                                }
             } // 닉네임 입력 HStack
             .padding(30)
             VStack{
@@ -138,36 +138,37 @@ struct SignUpView: View {
                         .keyboardType(.emailAddress)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
-                    //                    Button{
-                    //                        if checkEmail(str: email){
-                    //                            CheckMessage = ""
-                    //                            self.ShowModel = true
-                    //                        }
-                    //                        else{
-                    //                            CheckMessage = "학교 이메일을 입력해주세요"
-                    //                        }
-                    //                    }
-                    //                label: {
-                    //                        Text("인증번호 발송")
-                    //                            .foregroundColor(Color(red: 0.76, green: 0.552, blue: 0.552))
-                    //                            .frame(width: 90, height:50)
-                    //                            .background(RoundedRectangle(cornerRadius: 10).strokeBorder(Color(red: 0.76, green: 0.552, blue: 0.552)))
-                    //                            .sheet(isPresented: self.$ShowModel) {
-                    //                                ModalView(ShowModel: ShowModel)
-                    ////                            }
-                    //
-                    //                    }
-                    //                }
-//                    HStack{
-//                        Text("\(CheckMessage)")
-//                            .padding(.leading, 30)
-//                            .font(.system(size: 14))
-//                            .foregroundColor(.gray)
-//                            .lineLimit(2)
-//                        Spacer()
-//                    }
+                                        Button{
+                                            if checkEmail(str: email){
+                                                CheckMessage = ""
+                                                self.ShowModel = true
+                                            }
+                                            else{
+                                                CheckMessage = "학교 이메일을 입력해주세요"
+                                            }
+                                        }
+                                    label: {
+                                            Text("인증번호 발송")
+                                                .foregroundColor(Color(red: 0.76, green: 0.552, blue: 0.552))
+                                                .frame(width: 90, height:50)
+                                                .background(RoundedRectangle(cornerRadius: 10).strokeBorder(Color(red: 0.76, green: 0.552, blue: 0.552)))
+                                                .sheet(isPresented: self.$ShowModel) {
+                                                    ModalView(ShowModel: ShowModel)
+                    //                            }
+                    
+                                        }
+                                    }
+                    HStack{
+                        Text("\(CheckMessage)")
+                            .padding(.leading, 30)
+                            .font(.system(size: 14))
+                            .foregroundColor(.gray)
+                            .lineLimit(2)
+                        Spacer()
+                    }
                     
                 }
+                .padding(.leading, 45)
                 .padding(.bottom, 16)// 학번 중복확인 HStack
                 VStack(spacing: 15){ // 비밀번호 입력 받는 SecureField
                     SecureField("비밀번호를 입력해주세요 *", text: $password)
@@ -175,14 +176,14 @@ struct SignUpView: View {
                         .frame(width: 350, height: 50)
                         .background(Color(uiColor: .secondarySystemBackground))
                         .cornerRadius(10)
-//                        .onChange(of: password) { V in
-//                            if (password == RepeatedPassword) {
-//                            }
-//                            else {
-//                                print(passwordError)
-//                            }
-//                        }
-//                        .padding(.bottom, 10)// 학번 중복확인 HStack
+                        .onChange(of: password) { V in
+                            if (password == RepeatedPassword) {
+                            }
+                            else {
+                                print(passwordError)
+                            }
+                        }
+                        .padding(.bottom, 10)// 학번 중복확인 HStack
                     
                     VStack(spacing: 5){ // 비밀번호 입력 확인 안내문구와 SecureField
                         SecureField("비밀번호를 한번 더 입력해주세요*", text: $RepeatedPassword)
@@ -190,153 +191,153 @@ struct SignUpView: View {
                             .frame(width: 350, height: 50)
                             .background(Color(uiColor: .secondarySystemBackground))
                             .cornerRadius(10)
-//                            .onChange(of: RepeatedPassword) { V in
-//                                if (password == RepeatedPassword) {
-//                                    passwordError = ""
-//                                }
-//                                else {
-//                                    passwordError = "비밀번호가 일치하지 않습니다."
-//                                }
-//                            }
-//                        HStack{ // 비밀번호 안내문구 출력
-//                            Text(passwordError)
-//                                .padding(.leading, 30)
-//                                .font(.system(size: 14))
-//                                .foregroundColor(.red)
-//                            Spacer() // 문구 왼쪽 정렬을 위함
-//                        }
+                            .onChange(of: RepeatedPassword) { V in
+                                if (password == RepeatedPassword) {
+                                    passwordError = ""
+                                }
+                                else {
+                                    passwordError = "비밀번호가 일치하지 않습니다."
+                                }
+                            }
+                        HStack{ // 비밀번호 안내문구 출력
+                            Text(passwordError)
+                                .padding(.leading, 30)
+                                .font(.system(size: 14))
+                                .foregroundColor(.red)
+                            Spacer() // 문구 왼쪽 정렬을 위함
+                        }
                     } // 비밀번호 입력 확인 Field
                 } // 비밀번호 입력 받는 Field
-//                .padding(.bottom, 30)// 학번 중복확인 HStack
+                .padding(.bottom, 30)// 학번 중복확인 HStack
                 
-//                HStack(spacing: 30){
-//                    Text("학기 선택")
-//                        .font(.system(size: 14))
-//                    Group{
-//                        Menu {
-//                            Section(header: Text("재학중인 학기를 선택하시오")) {
-//                                Button(action: {
-//                                    Semester = 8
-//                                    SemesterMessage = "4학년 2학기"
-//                                }) {
-//                                    Label("4학년 2학기", systemImage: "")
-//                                }
-//                                Button(action: {
-//                                    Semester = 7
-//                                    SemesterMessage = "4학년 1학기"
-//                                }) {
-//                                    Label("4학년 1학기", systemImage: "")
-//                                }
-//                                Button(action: {
-//                                    Semester = 6
-//                                    SemesterMessage = "3학년 2학기"
-//                                }) {
-//                                    Label("3학년 2학기", systemImage: "")
-//                                }
-//                                Button(action: {
-//                                    Semester = 5
-//                                    SemesterMessage = "3학년 1학기"
-//                                }) {
-//                                    Label("3학년 1학기", systemImage: "")
-//                                }
-//                                Button(action: {
-//                                    Semester = 4
-//                                    SemesterMessage = "2학년 2학기"
-//                                }) {
-//                                    Label("2학년 2학기", systemImage: "")
-//                                }
-//                                Button(action: {
-//                                    Semester = 3
-//                                    SemesterMessage = "2학년 1학기"
-//                                }) {
-//                                    Label("2학년 1학기", systemImage: "")
-//                                }
-//                                Button(action: {
-//                                    Semester = 2
-//                                    SemesterMessage = "1학년 2학기"
-//                                }) {
-//                                    Label("1학년 2학기", systemImage: "")
-//                                }
-//                                Button(action: {
-//                                    Semester = 1
-//                                    SemesterMessage = "1학년 1학기"
-//                                }) {
-//                                    Label("1학년 1학기", systemImage: "")
-//                                }
-//                            }
-//                        }
-//                    label: {
-//                        Label("\(SemesterMessage)", systemImage: "")
-//                            .foregroundColor(Color(.gray))
-//                            .accentColor(.gray)
-//                            .padding()
-//                            .frame(width: 250, height: 50)
-//                            .background(Color(uiColor: .secondarySystemBackground))
-//                            .cornerRadius(10)
-//                    }
-//                    }
-//                }
-//                .padding(.bottom, 30)
+                HStack(spacing: 30){
+                    Text("학기 선택")
+                        .font(.system(size: 14))
+                    Group{
+                        Menu {
+                            Section(header: Text("재학중인 학기를 선택하시오")) {
+                                Button(action: {
+                                    Semester = 8
+                                    SemesterMessage = "4학년 2학기"
+                                }) {
+                                    Label("4학년 2학기", systemImage: "")
+                                }
+                                Button(action: {
+                                    Semester = 7
+                                    SemesterMessage = "4학년 1학기"
+                                }) {
+                                    Label("4학년 1학기", systemImage: "")
+                                }
+                                Button(action: {
+                                    Semester = 6
+                                    SemesterMessage = "3학년 2학기"
+                                }) {
+                                    Label("3학년 2학기", systemImage: "")
+                                }
+                                Button(action: {
+                                    Semester = 5
+                                    SemesterMessage = "3학년 1학기"
+                                }) {
+                                    Label("3학년 1학기", systemImage: "")
+                                }
+                                Button(action: {
+                                    Semester = 4
+                                    SemesterMessage = "2학년 2학기"
+                                }) {
+                                    Label("2학년 2학기", systemImage: "")
+                                }
+                                Button(action: {
+                                    Semester = 3
+                                    SemesterMessage = "2학년 1학기"
+                                }) {
+                                    Label("2학년 1학기", systemImage: "")
+                                }
+                                Button(action: {
+                                    Semester = 2
+                                    SemesterMessage = "1학년 2학기"
+                                }) {
+                                    Label("1학년 2학기", systemImage: "")
+                                }
+                                Button(action: {
+                                    Semester = 1
+                                    SemesterMessage = "1학년 1학기"
+                                }) {
+                                    Label("1학년 1학기", systemImage: "")
+                                }
+                            }
+                        }
+                    label: {
+                        Label("\(SemesterMessage)", systemImage: "")
+                            .foregroundColor(Color(.gray))
+                            .accentColor(.gray)
+                            .padding()
+                            .frame(width: 250, height: 50)
+                            .background(Color(uiColor: .secondarySystemBackground))
+                            .cornerRadius(10)
+                    }
+                    }
+                }
+                .padding(.bottom, 30)
                 VStack(spacing: 1){ // 졸업유무 전공유형 스텍
-//                    HStack(spacing: 30){
-//                        Text("졸업유무*")
-//                            .padding(.leading)
-//                            .font(.system(size: 14))
-//                        HStack(spacing: 30){
-//                            Button(action: {
-//                                graduate.toggle()
-//                            }) {
-//                                if graduate {
-//                                    ZStack{
-//                                        Circle()
-//                                            .fill(Color(red: 0.603, green: 0.756, blue: 0.819))
-//                                            .frame(width: 15, height: 15)
-//                                        Circle()
-//                                            .fill(Color.white)
-//                                            .frame(width: 6, height: 6)
-//                                    }
-//                                    Text("미졸업")
-//                                }
-//                                else {
-//                                    Circle()
-//                                        .fill(Color.white)
-//                                        .frame(width: 15, height: 15)
-//                                        .overlay(Circle().stroke(Color.gray, lineWidth: 1))
-//                                    Text("미졸업")
-//                                }
-//                            }
-//                            .font(.system(size: 12))
-//                            .foregroundColor(.black)
-//
-//                            Button(action: {
-//                                graduate.toggle()
-//                            }) {
-//                                if !graduate {
-//                                    ZStack{
-//                                        Circle()
-//                                            .fill(Color(red: 0.603, green: 0.756, blue: 0.819))
-//                                            .frame(width: 15, height: 15)
-//                                        Circle()
-//                                            .fill(Color.white)
-//                                            .frame(width: 6, height: 6)
-//                                    }
-//                                    Text("졸업")
-//                                }
-//                                else {
-//                                    Circle()
-//                                        .fill(Color.white)
-//                                        .frame(width: 15, height: 15)
-//                                        .overlay(Circle().stroke(Color.gray, lineWidth: 1))
-//                                    Text("졸업")
-//                                }
-//                            }
-//                            .font(.system(size: 12))
-//                            .foregroundColor(.black)
-//                            Spacer()
-//                        }
-//                        .frame(width: 250, height: 50)
-//                    }
-//                    .padding(.bottom, 30)
+                    HStack(spacing: 30){
+                        Text("졸업유무*")
+                            .padding(.leading)
+                            .font(.system(size: 14))
+                        HStack(spacing: 30){
+                            Button(action: {
+                                graduate.toggle()
+                            }) {
+                                if graduate {
+                                    ZStack{
+                                        Circle()
+                                            .fill(Color(red: 0.603, green: 0.756, blue: 0.819))
+                                            .frame(width: 15, height: 15)
+                                        Circle()
+                                            .fill(Color.white)
+                                            .frame(width: 6, height: 6)
+                                    }
+                                    Text("미졸업")
+                                }
+                                else {
+                                    Circle()
+                                        .fill(Color.white)
+                                        .frame(width: 15, height: 15)
+                                        .overlay(Circle().stroke(Color.gray, lineWidth: 1))
+                                    Text("미졸업")
+                                }
+                            }
+                            .font(.system(size: 12))
+                            .foregroundColor(.black)
+
+                            Button(action: {
+                                graduate.toggle()
+                            }) {
+                                if !graduate {
+                                    ZStack{
+                                        Circle()
+                                            .fill(Color(red: 0.603, green: 0.756, blue: 0.819))
+                                            .frame(width: 15, height: 15)
+                                        Circle()
+                                            .fill(Color.white)
+                                            .frame(width: 6, height: 6)
+                                    }
+                                    Text("졸업")
+                                }
+                                else {
+                                    Circle()
+                                        .fill(Color.white)
+                                        .frame(width: 15, height: 15)
+                                        .overlay(Circle().stroke(Color.gray, lineWidth: 1))
+                                    Text("졸업")
+                                }
+                            }
+                            .font(.system(size: 12))
+                            .foregroundColor(.black)
+                            Spacer()
+                        }
+                        .frame(width: 250, height: 50)
+                    }
+                    .padding(.bottom, 30)
                     
                     HStack(spacing: 30){
                         Text("전공유형*")
@@ -521,13 +522,13 @@ struct SignUpView: View {
                             }
                         }
                         .frame(width: 350, height: 50)
-//                        HStack{ // 비밀번호 안내문구 출력
-//                            if major1 == major2{
-//                                Text(MarjorError)
-//                                    .font(.system(size: 14))
-//                                    .foregroundColor(.red)
-//                            }
-//                        }
+                        HStack{ // 비밀번호 안내문구 출력
+                            if major1 == major2{
+                                Text(MarjorError)
+                                    .font(.system(size: 14))
+                                    .foregroundColor(.red)
+                            }
+                        }
                     }.padding(.bottom, 30)
                     Spacer()
                     Button(action: {
@@ -571,8 +572,8 @@ struct SignUpView: View {
                 }
                 
             }//VStack 종료 부분
-            //                .padding(.trailing, 30)
-            //                .padding(.leading, 30) 임시로 블러처리
+                            .padding(.trailing, 30)
+                            .padding(.leading, 30)
             
         }
     }
