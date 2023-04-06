@@ -80,7 +80,7 @@ struct SettingView: View {
                 .cornerRadius(5)
                 .font(.system(size: 15, weight: .semibold))
                 
-                .foregroundColor(.mainButtonColor)
+                .foregroundColor(.pointColorR)
                 Text("© 2023. ( PBCH^2YM ) all right reserved")
                 Text("")
             }
