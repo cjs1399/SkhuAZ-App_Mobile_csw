@@ -21,12 +21,17 @@ struct SignUp: Hashable, Codable {
     let double_major: Bool
 }
 
+
+
 struct Login: Hashable, Codable {
     // 로그인 성공 시 반환되는 값x
 }
 
 
 class RestAPI: ObservableObject {
+    
+    private let defaults = UserDefaults.standard
+    
     static let shared = RestAPI()
         @Published var signup: [SignUp] = []
         @Published var login: [Login] = []
@@ -100,7 +105,9 @@ class RestAPI: ObservableObject {
 //                let posts = try JSONDecoder().decode(Login.self, from: data)
                 DispatchQueue.main.async {
                     completion(true)
-                    print("여기는 let posts 파트",posts)
+                    print("로그인 성공!")
+                    print("여기는 let posts 파트", posts)
+                    self?.defaults.set(posts, forKey: "key")
                 }
             }
             catch {

@@ -43,35 +43,33 @@ struct LoginView: View {
                             .cornerRadius(10)
                         
                     })
-                
-                
                 .padding(.top)
                 Button(action: {
-                                            // 이메일, 비밀번호 로그인 api 파라미터로 보내주기
-                                            if email != "" && password != "" {
-                                                let parameters: [String: Any] = ["email": email, "password": password]
-                                                api.LoginSuccess(parameters: parameters) { value in
-
-                                                    if value {
-                                                        self.loginSuccess = true
-                                                        print(self.loginSuccess,"여기 로그인 실행 이후 loginsuccess 값")
-                                                    }
-                                                    else {
-                                                        self.error = true
-                                                    }
-                                                }
-                                            }
-                                            else {
-                                                self.error = true
-                                            }
-                                        }) {
-                                            Text("로그인")
-                                                .frame(width: 100, height: 35)
-                                                .fontWeight(.semibold)
-                                                .font(.title3)
-                                                .foregroundColor(.white)
-                                                .background(RoundedRectangle(cornerRadius: 40).fill(Color.green))
-                                        }
+                    // 이메일, 비밀번호 로그인 api 파라미터로 보내주기
+                    if email != "" && password != "" {
+                        let parameters: [String: Any] = ["email": email, "password": password]
+                        api.LoginSuccess(parameters: parameters) { value in
+                            
+                            if value {
+                                self.loginSuccess = true
+                                print(self.loginSuccess,"여기 로그인 실행 이후 loginsuccess 값")
+                            }
+                            else {
+                                self.error = true
+                            }
+                        }
+                    }
+                    else {
+                        self.error = true
+                    }
+                }) {
+                    Text("로그인")
+                        .frame(width: 100, height: 35)
+                        .fontWeight(.semibold)
+                        .font(.title3)
+                        .foregroundColor(.white)
+                        .background(RoundedRectangle(cornerRadius: 40).fill(Color.green))
+                }
                 HStack{
                     Spacer()
                     NavigationLink(
@@ -82,22 +80,22 @@ struct LoginView: View {
                                 .foregroundColor(Color.gray)
                                 .padding(.trailing)
                         })
-//                    NavigationLink(destination: SignUpView().navigationBarTitle(Text("SKHUAZ"), displayMode: .inline)) {
-//                        Text("회원가입")
-//                            .font(.system(size: 10))
-//                            .foregroundColor(Color.gray)
-//                            .padding(.trailing)
-//                    }
+                    //                    NavigationLink(destination: SignUpView().navigationBarTitle(Text("SKHUAZ"), displayMode: .inline)) {
+                    //                        Text("회원가입")
+                    //                            .font(.system(size: 10))
+                    //                            .foregroundColor(Color.gray)
+                    //                            .padding(.trailing)
+                    //                    }
                     
                     
                 }
                 
             }
             // 로그인 실패 시 오류
-                                if error {
-                                    Text("아이디 또는 비밀번호 오류")
-                                        .foregroundColor(Color.red)
-                                }
+            if error {
+                Text("아이디 또는 비밀번호 오류")
+                    .foregroundColor(Color.red)
+            }
         }
     }
     

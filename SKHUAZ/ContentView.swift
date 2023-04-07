@@ -11,8 +11,9 @@ struct ContentView: View {
     @State var isActive: Bool = false
         @State var loginSuccess = false
     var body: some View {
-        LoginView(loginSuccess: $loginSuccess)
-//        make()
+//            authView()
+//        LoginView(loginSuccess: $loginSuccess)
+        sample()
     }
 }
 
