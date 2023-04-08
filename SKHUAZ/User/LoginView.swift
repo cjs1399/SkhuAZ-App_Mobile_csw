@@ -6,8 +6,13 @@ struct LoginView: View {
     @State private var password: String = ""
     @State private var signup = false
     @StateObject var api = RestAPI.shared
-    @Binding var loginSuccess: Bool // 화면 전환 시 사용
+    //    @Binding var loginSuccess: Bool // 화면 전환 시 사용
     @State private var error = false
+    @State var login_onoff: Bool
+    
+    func logintoggle() {
+        login_onoff = RestAPI.LogineSuccess
+    }
     
     
     var body: some View {
@@ -31,45 +36,43 @@ struct LoginView: View {
                     .cornerRadius(10)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
-                NavigationLink(
-                    destination: TabbarView(),
-                    label: {
-                        Text("로그인")
-                            .frame(width: 330, height: 10)
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color(red: 0.603, green: 0.756, blue: 0.819))
-                            .cornerRadius(10)
-                        
-                    })
-                .padding(.top)
+                    .padding(.top)
                 Button(action: {
                     // 이메일, 비밀번호 로그인 api 파라미터로 보내주기
                     if email != "" && password != "" {
                         let parameters: [String: Any] = ["email": email, "password": password]
+                        RestAPI.LogineSuccess = true
                         api.LoginSuccess(parameters: parameters) { value in
-                            
                             if value {
-                                self.loginSuccess = true
-                                print(self.loginSuccess,"여기 로그인 실행 이후 loginsuccess 값")
-                            }
-                            else {
+                            } else {
                                 self.error = true
                             }
                         }
-                    }
-                    else {
+                    } else {
                         self.error = true
                     }
+                    // 로그인 상태를 업데이트합니다.
+                    if RestAPI.LogineSuccess == true {
+                        login_onoff = true
+                    }
+                    else {
+                        login_onoff = false
+                    }
+                    
                 }) {
-                    Text("로그인")
-                        .frame(width: 100, height: 35)
-                        .fontWeight(.semibold)
-                        .font(.title3)
+                    Text("로그인 api 슈우우우웃~")
+                        .frame(width: 330, height: 10)
+                        .font(.headline)
                         .foregroundColor(.white)
-                        .background(RoundedRectangle(cornerRadius: 40).fill(Color.green))
+                        .padding()
+                        .background(Color(red: 0.603, green: 0.756, blue: 0.819))
+                        .cornerRadius(10)
                 }
+                .background(
+                    NavigationLink(destination: TabbarView(), isActive: $login_onoff) {
+                        EmptyView()
+                    }
+                )
                 HStack{
                     Spacer()
                     NavigationLink(
@@ -80,14 +83,6 @@ struct LoginView: View {
                                 .foregroundColor(Color.gray)
                                 .padding(.trailing)
                         })
-                    //                    NavigationLink(destination: SignUpView().navigationBarTitle(Text("SKHUAZ"), displayMode: .inline)) {
-                    //                        Text("회원가입")
-                    //                            .font(.system(size: 10))
-                    //                            .foregroundColor(Color.gray)
-                    //                            .padding(.trailing)
-                    //                    }
-                    
-                    
                 }
                 
             }

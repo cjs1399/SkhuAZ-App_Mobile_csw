@@ -658,7 +658,7 @@ struct SignUpView: View {
                 }.padding(.bottom, 30)
                 Spacer()
                 Button(action: {
-                    /**
+                    /*
                      let email: String
                      let password: String
                      let nickname: String
@@ -673,7 +673,6 @@ struct SignUpView: View {
                         
                         let parameters: [String: Any] = ["email": email, "password": password, "checkpassword": RepeatedPassword, "nickname": Nickname, "graduate": graduate, "magor1": major1, "major2": major2, "department": department, "major_minor": major_minor, "double_major": double_major]
                         
-                        print(parameters)
                         api.Signup(parameters: parameters)
                         
                         // api 보냈으니까 text 비워주기

@@ -26,7 +26,7 @@ struct user_thumbs: View{
             HStack{
                 Text("최근 진행한 선수과목제도")
                 Spacer()
-               
+                
             }
             .font(.system(size: 10))
             .foregroundColor(Color(hex: 0x7D7D7D))
@@ -119,41 +119,15 @@ struct user_post: View{
 }
 
 struct user_data: View{
+    @StateObject var Login = RestAPI()
     var body: some View{
-        HStack(spacing: 20){
-            Spacer()
-            ZStack{
-                Circle()
-                    .fill(Color(hex: 0xEFEFEF))
-                    .frame(width: 150, height: 150)
-                
-                Text("프로필 사진")
-                    .foregroundColor(Color(hex: 0x7D7D7D))
-            }
-            VStack(spacing: 5){
-                HStack{
-                    Text("201814077")
-                    Text("천상구")
-                    Spacer()
-                }
-                HStack{
-                    Text("소프트웨어공학전공")
-                    Spacer()
-                }
-                HStack{
-                    Text("정보통신공학전공")
-                    Spacer()
-                }
-                HStack{
-                    Text("4학년 1학기")
-                    Spacer()
-                    
-                }
-            }
-            .font(.system(size: 15))
-
-
-        }
+        
+        
+        
+        
+                        ForEach(Login.posts, id: \.self) { result in
+                            UserData.email = result.email
+                            }
     }
 }
 extension Color {
