@@ -1,23 +1,106 @@
 import SwiftUI
 
+
+
 struct MainView: View {
-    @Binding var index: Int
-    var body: some View {
-        NavigationView{
-            VStack(spacing: 10){
-                Image("Logo")
-                    .resizable()
-                    .frame(width: 400, height: 200)
-                    .padding(.bottom, 5)
-                user_data()
-                    .padding(.bottom, 5)
-                user_post(index: $index)
-                    .padding(.bottom, 5)
-                user_thumbs()
-                Spacer()
-            }
+    func Semester_Change(semester: String) -> String{
+        if semester == "8" {
+            return "4학년 2학기"
+        }
+        else if semester == "7" {
+            return "4학년 1학기"
+        }
+        else if semester == "6" {
+            return "3학년 2학기"
+        }
+        else if semester == "5" {
+            return "3학년 1학기"
+        }
+        else if semester == "4" {
+            return "2학년 2학기"
+        }
+        else if semester == "3" {
+            return "2학년 1학기"
+        }
+        else if semester == "2" {
+            return "1학년 2학기"
+        }
+        else {
+            return "1학년 1학기"
         }
     }
+    @EnvironmentObject var userData: UserData
+    
+        @Binding var index: Int
+        @StateObject var Login = RestAPI()
+        var body: some View {
+            NavigationView{
+                VStack(spacing: 10){
+                    Image("Logo")
+                        .resizable()
+                        .frame(width: 400, height: 200)
+                        .padding(.bottom, 20)
+                    Image("CircleLogo")
+                        .resizable()
+                        .frame(width: 200, height: 200)
+                            .scaledToFit()
+                        .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.black, lineWidth: 1))
+                        .padding(.bottom, 20)
+                    
+                    HStack {
+                        Text("닉네임 :")
+                        Text(userData.nickname)
+                    }
+                    .padding(.bottom, 10)
+                    HStack {
+                        Text("학기 :")
+                        Text(Semester_Change(semester:userData.semester))
+                    }
+                    .padding(.bottom, 10)
+                    
+                    if userData.department {
+                        HStack {
+                            Text("학부 :")
+                            Text(userData.major1!)
+                        }
+                        .padding(.bottom, 10)
+                    }
+                    else if userData.major_minor {
+                        VStack {
+                            HStack {
+                                Text("주전공 :")
+                                Text(userData.major1!)
+                            }
+                            .padding(.bottom, 10)
+                            HStack {
+                                Text("부전공 :")
+                                Text(userData.major2!)
+                            }
+                            .padding(.bottom, 10)
+                        }
+                        
+                    }
+                    else if userData.double_major {
+                        VStack {
+                            HStack {
+                                Text("복수전공 1 :")
+                                Text(userData.major1!)
+                            }
+                            .padding(.bottom, 10)
+                            HStack {
+                                Text("복수전공 2 :")
+                                Text(userData.major2!)
+                            }
+                            .padding(.bottom, 10)
+                        }
+                        
+                    }
+
+                
+                Spacer()
+            }
+        }    }
 }
 
 struct user_thumbs: View{
@@ -118,18 +201,6 @@ struct user_post: View{
     }
 }
 
-struct user_data: View{
-    @StateObject var Login = RestAPI()
-    var body: some View{
-        
-        
-        
-        
-                        ForEach(Login.posts, id: \.self) { result in
-                            UserData.email = result.email
-                            }
-    }
-}
 extension Color {
     init(hex: UInt, alpha: Double = 1) {
         self.init(

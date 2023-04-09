@@ -8,13 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var isActive: Bool = false
-    @State var loginSuccess = false
+    @State var isActive: Bool = RestAPI.LogineSuccess
+    @State var loginSuccess = RestAPI.LogineSuccess
     var body: some View {
         ZStack {
-            Color(.blue).ignoresSafeArea()
+            Image("CircleLogo")
+                .resizable()
+                .frame(width: 300, height: 400)
+                    .scaledToFit()
+                .clipShape(Circle())
+                    .overlay(Circle().stroke(Color(hex: 0x9AC1D1), lineWidth: 1))
+                .ignoresSafeArea()
                     if self.isActive {
-                        if loginSuccess { // true면 화면 넘어감
+                        if RestAPI.LogineSuccess
+                        { // true면 화면 넘어감
                             TabbarView()
                                 .navigationBarBackButtonHidden(true)
                                 .navigationBarHidden(true)

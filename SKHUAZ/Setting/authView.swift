@@ -14,8 +14,10 @@ struct authView: View {
     @State private var showAlert: Bool = false
     @State private var alertMessage: String = ""
     @State private var isLoggedIn: Bool = false
-    
+    @EnvironmentObject var userData: UserData
+    @State private var isactive:Bool = false
     var body: some View {
+        
         VStack{
             Image("skhuazbanner")
                 .resizable()
@@ -35,15 +37,17 @@ struct authView: View {
                 .frame(width: 350, height: 50)
                 .background(Color(uiColor: .secondarySystemBackground))
                 .cornerRadius(10)
+                .autocapitalization(.none) // 자동으로 대문자 설정 안하기
                 .keyboardType(.emailAddress)
             SecureField("비밀번호를 입력해주세요", text: $password)
                 .padding()
                 .frame(width: 350, height: 50)
                 .background(Color(uiColor: .secondarySystemBackground))
                 .cornerRadius(10)
+                .autocapitalization(.none) // 자동으로 대문자 설정 안하기
             Button(action: {
-                // Perform authentication here
-                if email == "correct_email" && password == "correct_password" {
+                isactive = true
+                if userData.email == email {
                     // Set isLoggedIn to true
                     isLoggedIn = true
                     // Show success alert
@@ -56,6 +60,7 @@ struct authView: View {
                     showAlert = true
                     alertMessage = "이메일 혹은 비밀번호가 일치하지 않습니다."
                 }
+//                self.presentationMode.wrappedValue.dismiss()
             }) {
                 Text("본인인증")
                     .frame(width: 330, height: 10)
@@ -66,8 +71,12 @@ struct authView: View {
                     .cornerRadius(10)
             }
             .padding(.top)
-            .alert(isPresented: $showAlert) {
-                Alert(title: Text("알림"), message: Text(alertMessage), dismissButton: .default(Text("확인")))
+//            .alert(isPresented: $showAlert) {
+//                Alert(title: Text("알림"), message: Text(alertMessage), dismissButton: .default(Text("확인")))
+//            }
+            NavigationLink(destination: sample(), isActive: $isactive) {
+                
+                EmptyView()
             }
             Spacer()
             Spacer()

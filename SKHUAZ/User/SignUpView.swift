@@ -23,17 +23,16 @@ struct SignUpView: View {
     @State var emailSuccess: Bool = false
     
     @State var RepeatedPassword: String = ""
-    @State var graduate: Bool = false
+    @State var graduate: Bool = false // 졸업유무
     @State var major1: String = ""
-    @State var major2: String = "null"
-    @State var department: Bool = true // 전공미선택
+    @State var major2: String = ""
+    @State var department: Bool = false // 전공미선택
     @State var major_minor: Bool = false // 주/부전공
     @State var double_major: Bool = false // 복수전공
-    @State var Semester: Int = 7
     
     @State private var date: String = ""
     @State private var passwordError: String = ""
-    //    @State private var Semester: Int
+    @State private var Semester: String = ""
     
     @State private var SemesterMessage: String = "재학중인 학기를 선택하시오"
     
@@ -195,8 +194,8 @@ struct SignUpView: View {
         ScrollView{
             Image("SKHUAZ")
                 .resizable()
-                .frame(width: 250, height: 60)
-                .padding(.bottom, 30)
+                .frame(width: 300, height: 100)
+                .padding(.bottom, 10)
             Text("  ") // 상단 여백을 주기 위함
                 .padding(.bottom, 10)
             VStack{
@@ -206,8 +205,9 @@ struct SignUpView: View {
                         .frame(width: 250, height: 50)
                         .background(Color(uiColor: .secondarySystemBackground))
                         .cornerRadius(10)
+                        .autocapitalization(.none) // 자동으로 대문자 설정 안하기
                     Button{
-                        // 5. API 요청
+                        // 5. 닉네임 중복확인 API 요청
                         let urlString = "http://skhuaz.duckdns.org/checkDuplicate/\(Nickname)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
                         guard let url = URL(string: urlString) else { return }
                         
@@ -255,7 +255,8 @@ struct SignUpView: View {
                     }
                 }
             }
-            .padding(.bottom, 5)
+            .padding(.bottom, 5)    // 닉네임 중복확인 종료.
+            
             VStack{
                 HStack{
                     TextField("학교이메일을 입력해주세요* ", text: $email)
@@ -309,7 +310,7 @@ struct SignUpView: View {
                             print(passwordError)
                         }
                     }
-                    .padding(.bottom, 10)// 학번 중복확인 HStack
+                    .padding(.bottom, 10)// 비밀번호 중복확인 HStack
                 
                 VStack(spacing: 5){ // 비밀번호 입력 확인 안내문구와 SecureField
                     SecureField("비밀번호를 한번 더 입력해주세요*", text: $RepeatedPassword)
@@ -343,49 +344,49 @@ struct SignUpView: View {
                     Menu {
                         Section(header: Text("재학중인 학기를 선택하시오")) {
                             Button(action: {
-                                Semester = 8
+                                Semester = "8"
                                 SemesterMessage = "4학년 2학기"
                             }) {
                                 Label("4학년 2학기", systemImage: "")
                             }
                             Button(action: {
-                                Semester = 7
+                                Semester = "7"
                                 SemesterMessage = "4학년 1학기"
                             }) {
                                 Label("4학년 1학기", systemImage: "")
                             }
                             Button(action: {
-                                Semester = 6
+                                Semester = "6"
                                 SemesterMessage = "3학년 2학기"
                             }) {
                                 Label("3학년 2학기", systemImage: "")
                             }
                             Button(action: {
-                                Semester = 5
+                                Semester = "5"
                                 SemesterMessage = "3학년 1학기"
                             }) {
                                 Label("3학년 1학기", systemImage: "")
                             }
                             Button(action: {
-                                Semester = 4
+                                Semester = "4"
                                 SemesterMessage = "2학년 2학기"
                             }) {
                                 Label("2학년 2학기", systemImage: "")
                             }
                             Button(action: {
-                                Semester = 3
+                                Semester = "3"
                                 SemesterMessage = "2학년 1학기"
                             }) {
                                 Label("2학년 1학기", systemImage: "")
                             }
                             Button(action: {
-                                Semester = 2
+                                Semester = "2"
                                 SemesterMessage = "1학년 2학기"
                             }) {
                                 Label("1학년 2학기", systemImage: "")
                             }
                             Button(action: {
-                                Semester = 1
+                                Semester = "1"
                                 SemesterMessage = "1학년 1학기"
                             }) {
                                 Label("1학년 1학기", systemImage: "")
@@ -411,9 +412,9 @@ struct SignUpView: View {
                         .font(.system(size: 14))
                     HStack(spacing: 30){
                         Button(action: {
-                            graduate.toggle()
+                            graduate = false
                         }) {
-                            if graduate {
+                            if graduate == false {
                                 ZStack{
                                     Circle()
                                         .fill(Color(red: 0.603, green: 0.756, blue: 0.819))
@@ -436,9 +437,9 @@ struct SignUpView: View {
                         .foregroundColor(.black)
                         
                         Button(action: {
-                            graduate.toggle()
+                            graduate = true
                         }) {
-                            if !graduate {
+                            if graduate == true {
                                 ZStack{
                                     Circle()
                                         .fill(Color(red: 0.603, green: 0.756, blue: 0.819))
@@ -469,6 +470,8 @@ struct SignUpView: View {
                     Text("전공유형*")
                         .font(.system(size: 14))
                     HStack(spacing: 20){
+                        
+                        // 전공 미선택 선택시
                         Button(action: {
                             department = true
                             major_minor = false
@@ -499,6 +502,8 @@ struct SignUpView: View {
                             }
                         }
                         .aspectRatio(contentMode: .fill)
+                        
+                        // 주/부전공 선택시
                         Button(action: {
                             department = false
                             major_minor = true
@@ -529,6 +534,8 @@ struct SignUpView: View {
                             }
                         }
                         .aspectRatio(contentMode: .fill)
+                        
+                        // 복수전공 선택시
                         Button(action: {
                             department = false
                             major_minor = false
@@ -648,39 +655,37 @@ struct SignUpView: View {
                         }
                     }
                     .frame(width: 350, height: 50)
-                    HStack{ // 비밀번호 안내문구 출력
+                    // 비밀번호 안내문구 출력
                         if major1 == major2{
-                            Text(MarjorError)
-                                .font(.system(size: 14))
-                                .foregroundColor(.red)
+                            HStack {
+                                Text(MarjorError)
+                                    .font(.system(size: 14))
+                                    .foregroundColor(.red)
+                            }
                         }
-                    }
                 }.padding(.bottom, 30)
                 Spacer()
                 Button(action: {
-                    /*
-                     let email: String
-                     let password: String
-                     let nickname: String
-                     let graduate: Bool
-                     let magor1: String
-                     let magor2: String
-                     let department: Bool
-                     let major_minor: Bool
-                     let double_major: Bool
-                     */
                     if email != "" && password != "" && RepeatedPassword != "" && Nickname != ""{
                         
-                        let parameters: [String: Any] = ["email": email, "password": password, "checkpassword": RepeatedPassword, "nickname": Nickname, "graduate": graduate, "magor1": major1, "major2": major2, "department": department, "major_minor": major_minor, "double_major": double_major]
-                        
+                        let parameters: [String: Any] = ["email": email, "password": password, "checkpassword": RepeatedPassword, "nickname": Nickname, "graduate": graduate, "major1": major1, "major2": major2, "department": department, "major_minor": major_minor, "double_major": double_major, "semester": Semester]
+                        print("회원가입 parameters : \(parameters)")
                         api.Signup(parameters: parameters)
                         
-                        // api 보냈으니까 text 비워주기
+                        
+                        // 회원가입 api 보냈으니까 값 다 비워주기
                         email = ""
                         password = ""
                         RepeatedPassword = ""
                         Nickname = ""
-                        date = ""
+                        graduate = false
+                        major1 = ""
+                        major2 = ""
+                        department = false
+                        major_minor = false
+                        double_major = false
+                        Semester = ""
+                        
                     } else {
                         print("조건을 모두 입력하여주세요.")
                     }

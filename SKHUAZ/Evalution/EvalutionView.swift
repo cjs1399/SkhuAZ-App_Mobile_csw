@@ -11,7 +11,7 @@ import SwiftUI
 struct EvaluationView: View {
     
     @State private var input: String = ""
-    
+    @State var Evalution_write = false
     var body: some View {
         NavigationView{
             VStack{
@@ -36,20 +36,28 @@ struct EvaluationView: View {
                 HStack{
                     CheckBoxView()
                         .padding(.leading, 1)
-                    NavigationLink(
-                        destination: EvaluationDetail(),
-                        label: {
-                            Image(systemName: "square.and.pencil")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .padding(.bottom, 5)
-                                .foregroundColor(Color(hex: 0x9AC1D1))
-                                .padding(.trailing, 15)
-                                .frame(width: 50, height: 35)
-                        })
-                }
-                .padding(.bottom, 10)
-                
+                    
+                    Button(action: {
+                        
+                        Evalution_write = true
+                        
+                    }) {
+                        Image(systemName: "square.and.pencil")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .padding(.bottom, 5)
+                            .foregroundColor(Color(hex: 0x9AC1D1))
+                            .padding(.trailing, 15)
+                            .frame(width: 50, height: 35)
+                    }
+                    .padding(.bottom, 10)
+                    .background(
+                        NavigationLink(destination: EvaluationDetail(), isActive: $Evalution_write) {
+                            
+                            EmptyView()
+                        }
+                    )                }
+                                
                 ScrollView(.vertical, showsIndicators: false, content:  {
                     LisTView()
                         .padding(.top, 15)

@@ -6,7 +6,7 @@ struct LoginView: View {
     @State private var password: String = ""
     @State private var signup = false
     @StateObject var api = RestAPI.shared
-    //    @Binding var loginSuccess: Bool // 화면 전환 시 사용
+    @EnvironmentObject var userData: UserData
     @State private var error = false
     @State var login_onoff: Bool
     
@@ -20,7 +20,7 @@ struct LoginView: View {
             VStack{
                 Image("SKHUAZ")
                     .resizable()
-                    .frame(width: 250, height: 60)
+                    .frame(width: 300, height: 100)
                     .padding(.bottom)
                 TextField("아이디를 입력해주세요", text: $email)
                     .padding()
@@ -37,30 +37,29 @@ struct LoginView: View {
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
                     .padding(.top)
+                
                 Button(action: {
                     // 이메일, 비밀번호 로그인 api 파라미터로 보내주기
                     if email != "" && password != "" {
                         let parameters: [String: Any] = ["email": email, "password": password]
+                        
                         RestAPI.LogineSuccess = true
-                        api.LoginSuccess(parameters: parameters) { value in
+                        api.LoginSuccess(parameters: parameters, userData: self.userData) { value in
                             if value {
                             } else {
                                 self.error = true
                             }
                         }
-                    } else {
+                    }
+
+                    else {
                         self.error = true
                     }
-                    // 로그인 상태를 업데이트합니다.
-                    if RestAPI.LogineSuccess == true {
-                        login_onoff = true
-                    }
-                    else {
-                        login_onoff = false
-                    }
+                    
+                    login_onoff = RestAPI.LogineSuccess
                     
                 }) {
-                    Text("로그인 api 슈우우우웃~")
+                    Text("로그인 api 슈우우우웃~ / 유저데이터 : \(userData.email)")
                         .frame(width: 330, height: 10)
                         .font(.headline)
                         .foregroundColor(.white)
@@ -70,6 +69,7 @@ struct LoginView: View {
                 }
                 .background(
                     NavigationLink(destination: TabbarView(), isActive: $login_onoff) {
+                        
                         EmptyView()
                     }
                 )
@@ -92,6 +92,7 @@ struct LoginView: View {
                     .foregroundColor(Color.red)
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
     
     

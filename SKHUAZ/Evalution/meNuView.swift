@@ -8,15 +8,23 @@
 import SwiftUI
 
 struct meNuView : View {
-    @State private var Subject_name: String = "과목명"
-    @State private var professor_name: String = "교수님"
-    @State private var leason_year: String = "수강년도"
-    @State private var cl_major: String = "전공구분"
-    @State private var Semester: String = "학기"
-    @State private var teample: String = "선택"
-    
+    @State private var lectureName: String = "" // 과목명
+    @State private var prfsName: String = ""    // 교수님 성함
+    @State private var classYear: Int = 0   // 수강년도
+    @State private var semester: Int = 0   // 1 or 2 학기
+    @State private var department: String = ""  // 전공구분
+    @State private var is_major_required: Bool = false  // 전공필수 여부
+    @State private var teamPlay: String = "" // 팀플 점수
+    @State private var task: String = "" // 과제량
+    @State private var practice: String = "" // 연습
+    @State private var presentation: String = "" // 발표
+    @State private var review: String = "" // 리뷰
+
+    @StateObject var api = PostAPI()
+
+
     @State private var allreview: String = ""
-    
+
     var body: some View {
         VStack{
             Rectangle().fill(Color(hex: 0xEFEFEF))
@@ -24,20 +32,15 @@ struct meNuView : View {
                 .cornerRadius(10)
                 .overlay(content: {
                     HStack {
-                        Menu("\(Subject_name)") {
-                            Button("데이터베이스",
-                                   action: { Subject_name = "데이터베이스"})
-                            Button("자바프로그래밍",
-                                   action: { Subject_name = "자바프로그래밍"})
-                            Button("웹개발 입문",
-                                   action: { Subject_name = "웹개발 입문"})
-                            
-                        }
-                        .foregroundColor(Color(hex: 0x4F4F4F))
-                        Spacer()
+                        TextField("과목명을 입력해주세요.", text: $lectureName)
                             .padding()
-                            .frame(width: 10, height: 50)
+                        frame(width: 10, height: 50)
+                            .background(Color(uiColor: .secondarySystemBackground))
                             .cornerRadius(10)
+                            .autocapitalization(.none) // 자동으로 대문자 설정 안하기
+                            .disableAutocorrection(true) // 자동완성 끄기
+                            .foregroundColor(Color(hex: 0x4F4F4F))
+                        Spacer()
                     }
                 })
             Rectangle().fill(Color(hex: 0xEFEFEF))
@@ -45,20 +48,15 @@ struct meNuView : View {
                 .cornerRadius(10)
                 .overlay(content: {
                     HStack {
-                        Menu("\(professor_name)") {
-                            Button("홍은지",
-                                   action: { professor_name = "홍은지"})
-                            Button("이승진",
-                                   action: { professor_name = "이승진"})
-                            Button("문성현",
-                                   action: { professor_name = "문성현"})
-                            
-                        }
-                        .foregroundColor(Color(hex: 0x4F4F4F))
-                        Spacer()
+                        TextField("교수님 성함을 입력해주세요.", text: $lectureName)
                             .padding()
-                            .frame(width: 10, height: 50)
+                        frame(width: 10, height: 50)
+                            .background(Color(uiColor: .secondarySystemBackground))
                             .cornerRadius(10)
+                            .autocapitalization(.none) // 자동으로 대문자 설정 안하기
+                            .disableAutocorrection(true) // 자동완성 끄기
+                            .foregroundColor(Color(hex: 0x4F4F4F))
+                        Spacer()
                     }
                 })
             HStack{
@@ -67,16 +65,20 @@ struct meNuView : View {
                     .cornerRadius(10)
                     .overlay(content: {
                         HStack {
-                            Menu("\(leason_year)") {
+                            Menu("\(classYear)") {
                                 Button("2018년",
-                                       action: { leason_year = "2018년"})
+                                       action: { classYear = 2018})
                                 Button("2019년",
-                                       action: { leason_year = "2019년"})
+                                       action: { classYear = 2019})
                                 Button("2020년",
-                                       action: { leason_year = "2020년"})
+                                       action: { classYear = 2020})
                                 Button("2021년",
-                                       action: { leason_year = "2021년"})
-                                
+                                       action: { classYear = 2021})
+                                Button("2022년",
+                                       action: { classYear = 2022})
+                                Button("2023년",
+                                       action: { classYear = 2023})
+
                             }
                             .foregroundColor(Color(hex: 0x4F4F4F))
                             Spacer()
@@ -90,26 +92,11 @@ struct meNuView : View {
                     .cornerRadius(10)
                     .overlay(content: {
                         HStack {
-                            Menu("\(Semester)") {
-                                Button("1 - 1",
-                                       action: { Semester = "1 - 1"})
-                                Button("1 - 2",
-                                       action: { Semester = "1 - 2"})
-                                Button("2 - 1",
-                                       action: { Semester = "2 - 1"})
-                                Button("2 - 2",
-                                       action: { Semester = "2 - 2"})
-                                Button("3 - 1",
-                                       action: { Semester = "3 - 1"})
-                                Button("3 - 2",
-                                       action: { Semester = "3 - 2"})
-                                Button("4 - 1",
-                                       action: { Semester = "4 - 1"})
-                                Button("4 - 2",
-                                       action: { Semester = "4 - 2"})
-                                Button("5 - 1",
-                                       action: { Semester = "5 - 1"})
-                                
+                            Menu("\(semester)") {
+                                Button("1학기",
+                                       action: { semester = 1})
+                                Button("2학기",
+                                       action: { semester = 2})
                             }
                             .foregroundColor(Color(hex: 0x4F4F4F))
                             Spacer()
@@ -124,16 +111,16 @@ struct meNuView : View {
                 .cornerRadius(10)
                 .overlay(content: {
                     HStack {
-                        Menu("\(cl_major)") {
+                        Menu("\(department)") {
                             Button("소프트웨어공학",
-                                   action: { cl_major = "소프트웨어공학"})
+                                   action: { department = "소프트웨어공학"})
                             Button("정보통신공학",
-                                   action: { cl_major = "정보통신공학"})
+                                   action: { department = "정보통신공학"})
                             Button("컴퓨터공학",
-                                   action: { cl_major = "컴퓨터공학"})
-                            Button("인공지능공학",
-                                   action: { cl_major = "인공지능공학"})
-                            
+                                   action: { department = "컴퓨터공학"})
+                            Button("인공지능",
+                                   action: { department = "인공지능"})
+
                         }
                         .foregroundColor(Color(hex: 0x4F4F4F))
                         Spacer()
@@ -151,18 +138,18 @@ struct meNuView : View {
                     .cornerRadius(10)
                     .overlay(content: {
                         HStack {
-                            Menu("\(teample)") {
+                            Menu("\(teamPlay)") {
                                 Button("1",
-                                       action: { teample = "1"})
+                                       action: { teamPlay = "1"})
                                 Button("2",
-                                       action: { teample = "2"})
+                                       action: { teamPlay = "2"})
                                 Button("3",
-                                       action: { teample = "3"})
+                                       action: { teamPlay = "3"})
                                 Button("4",
-                                       action: { teample = "4"})
+                                       action: { teamPlay = "4"})
                                 Button("5",
-                                       action: { teample = "5"})
-                                
+                                       action: { teamPlay = "5"})
+
                             }
                             .foregroundColor(Color(hex: 0x4F4F4F))
                             Spacer()
@@ -181,18 +168,18 @@ struct meNuView : View {
                     .cornerRadius(10)
                     .overlay(content: {
                         HStack {
-                            Menu("\(teample)") {
+                            Menu("\(task)") {
                                 Button("1",
-                                       action: { teample = "1"})
+                                       action: { task = "1"})
                                 Button("2",
-                                       action: { teample = "2"})
+                                       action: { task = "2"})
                                 Button("3",
-                                       action: { teample = "3"})
+                                       action: { task = "3"})
                                 Button("4",
-                                       action: { teample = "4"})
+                                       action: { task = "4"})
                                 Button("5",
-                                       action: { teample = "5"})
-                                
+                                       action: { task = "5"})
+
                             }
                             .foregroundColor(Color(hex: 0x4F4F4F))
                             Spacer()
@@ -202,7 +189,7 @@ struct meNuView : View {
                         }
                     })
             }
-            
+
             HStack{
                 Text("실습량")
                     .padding(.leading, 40)
@@ -212,18 +199,18 @@ struct meNuView : View {
                     .cornerRadius(10)
                     .overlay(content: {
                         HStack {
-                            Menu("\(teample)") {
+                            Menu("\(practice)") {
                                 Button("1",
-                                       action: { teample = "1"})
+                                       action: { practice = "1"})
                                 Button("2",
-                                       action: { teample = "2"})
+                                       action: { practice = "2"})
                                 Button("3",
-                                       action: { teample = "3"})
+                                       action: { practice = "3"})
                                 Button("4",
-                                       action: { teample = "4"})
+                                       action: { practice = "4"})
                                 Button("5",
-                                       action: { teample = "5"})
-                                
+                                       action: { practice = "5"})
+
                             }
                             .foregroundColor(Color(hex: 0x4F4F4F))
                             Spacer()
@@ -242,18 +229,18 @@ struct meNuView : View {
                     .cornerRadius(10)
                     .overlay(content: {
                         HStack {
-                            Menu("\(teample)") {
+                            Menu("\(presentation)") {
                                 Button("1",
-                                       action: { teample = "1"})
+                                       action: { presentation = "1"})
                                 Button("2",
-                                       action: { teample = "2"})
+                                       action: { presentation = "2"})
                                 Button("3",
-                                       action: { teample = "3"})
+                                       action: { presentation = "3"})
                                 Button("4",
-                                       action: { teample = "4"})
+                                       action: { presentation = "4"})
                                 Button("5",
-                                       action: { teample = "5"})
-                                
+                                       action: { presentation = "5"})
+
                             }
                             .foregroundColor(Color(hex: 0x4F4F4F))
                             Spacer()
@@ -263,7 +250,7 @@ struct meNuView : View {
                         }
                     })
             }
-            TextField("강의총평 100자 제한", text: $allreview )
+            TextField("강의총평 100자 제한", text: $review )
                 .padding(.bottom, 50)
                 .padding([.leading, .top])
                 .frame(width: 350, height: 100)
@@ -274,9 +261,83 @@ struct meNuView : View {
         .overlay(
             RoundedRectangle(cornerRadius: 10)
                 .stroke(Color.black, lineWidth: 1)
-            )
+        )
+
+
+        //저장 버튼
+        Rectangle().fill(Color(hex: 0x9AC1D1))
+            .frame(width: 350, height: 40)
+            .cornerRadius(10)
+            .overlay(content: {
+                HStack {
+
+//                    @State private var lectureName: String = "" // 과목명
+//                    @State private var prfsName: String = ""    // 교수님 성함
+//                    @State private var classYear: Int = 0   // 수강년도
+//                    @State private var semester: Int = 0   // 1 or 2 학기
+//                    @State private var department: String = ""  // 전공구분
+//                    @State private var is_major_required: Bool = false  // 전공필수 여부
+//                    @State private var teamPlay: String = "" // 팀플 점수
+//                    @State private var task: String = "" // 과제량
+//                    @State private var practice: String = "" // 연습
+//                    @State private var presentation: String = "" // 발표
+//                    @State private var review: String = "" // 리뷰
+                    
+                    Button(action: {
+                        if lectureName != "" && prfsName != "" && classYear != 0 && semester != 0{
+
+//                            let parameters: [String: Any] = ["lectureName": lectureName, "prfsName": prfsName, "classYear": classYear, "semester": semester, "department": department, "is_major_required": is_major_required, "teamPlay": teamPlay, "task": task, "practice": practice, "presentation": presentation, "review": review]
+//                            print("강의평 Create parameters : \(parameters)")
+//                            api.postMethod(parameters: parameters)
+
+
+                            // 회원가입 api 보냈으니까 값 다 비워주기
+                            lectureName = ""
+                            prfsName = ""
+                            classYear = 0
+                            semester = 0
+                            department = ""
+                            is_major_required = false
+                            teamPlay = ""
+                            task = ""
+                            practice = ""
+                            presentation = ""
+                            review = ""
+
+                        } else {
+                            print("조건을 모두 입력하여주세요.")
+                        }
+                    })
+                    {
+                        Text("저장")
+                            .foregroundColor(Color.white)
+                            .font(.system(size: 15))
+                    }
+                }
+            })
+
+        //목록으로 버튼
+        Rectangle().fill(Color(hex: 0xEFEFEF))
+            .frame(width: 350, height: 40)
+            .cornerRadius(10)
+            .overlay(content: {
+                HStack {
+                    Button{
+//                        self.presentationMode.wrappedValue.dismiss()
+                    } label: {
+
+                        Text("목록으로")
+                            .foregroundColor(Color.black)
+                            .font(.system(size: 15))
+
+                    }
+
+                }
+            })
+        Spacer()
     }
 }
+
 
 struct meNuView_Previews: PreviewProvider {
     static var previews: some View {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0369C8ABF968139E77CC2EFB /* Pods_SKHUAZTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45DD576BDA1673AB72F3B7B5 /* Pods_SKHUAZTests.framework */; };
 		2528F4A629BF7F0C00A148D2 /* CurriculumJavaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2528F4A529BF7F0C00A148D2 /* CurriculumJavaView.swift */; };
 		2528F4A829BF7F1B00A148D2 /* CurriculumSWView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2528F4A729BF7F1B00A148D2 /* CurriculumSWView.swift */; };
 		256CBF4729BEF8270081AC2B /* Root_Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256CBF4629BEF8270081AC2B /* Root_Detail.swift */; };
@@ -19,7 +20,6 @@
 		257589C729BF00EB00A604A6 /* LisTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257589C629BF00EB00A604A6 /* LisTView.swift */; };
 		257589C929BF00FD00A604A6 /* meNuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257589C829BF00FD00A604A6 /* meNuView.swift */; };
 		257589CB29BF010D00A604A6 /* myEvaluationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257589CA29BF010D00A604A6 /* myEvaluationView.swift */; };
-		257CF54129D42D84008787F8 /* sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257CF54029D42D84008787F8 /* sample.swift */; };
 		25828BFB29BDB4930077FBDB /* SKHUAZApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25828BFA29BDB4930077FBDB /* SKHUAZApp.swift */; };
 		25828BFD29BDB4930077FBDB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25828BFC29BDB4930077FBDB /* ContentView.swift */; };
 		25828BFF29BDB4940077FBDB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 25828BFE29BDB4940077FBDB /* Assets.xcassets */; };
@@ -43,7 +43,13 @@
 		25FDD58A29C1976F00D3C132 /* setModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FDD58929C1976F00D3C132 /* setModeView.swift */; };
 		25FDD58C29C1978600D3C132 /* communityRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FDD58B29C1978600D3C132 /* communityRuleView.swift */; };
 		25FDD58E29C1979B00D3C132 /* quitAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FDD58D29C1979B00D3C132 /* quitAccountView.swift */; };
+		3269C83B6234A336C93DB4F1 /* Pods_SKHUAZ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56010323B08146969CC98C1E /* Pods_SKHUAZ.framework */; };
+		834D589E6D960406A2B5FBAC /* Pods_SKHUAZ_SKHUAZUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3ADD764D28236C96337DCD1A /* Pods_SKHUAZ_SKHUAZUITests.framework */; };
 		9EB6E13C29DD478F008A02AA /* RestAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB6E13B29DD478F008A02AA /* RestAPI.swift */; };
+		9EDB447429E1597900001AB0 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 9EDB447329E1597900001AB0 /* Alamofire */; };
+		9EDB447729E1636700001AB0 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 9EDB447629E1636700001AB0 /* SwiftyJSON */; };
+		9EDB447929E1D17D00001AB0 /* PostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDB447829E1D17D00001AB0 /* PostAPI.swift */; };
+		9EDB447D29E29D6400001AB0 /* sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EDB447C29E29D6400001AB0 /* sample.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,7 +83,6 @@
 		257589C629BF00EB00A604A6 /* LisTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LisTView.swift; sourceTree = "<group>"; };
 		257589C829BF00FD00A604A6 /* meNuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = meNuView.swift; sourceTree = "<group>"; };
 		257589CA29BF010D00A604A6 /* myEvaluationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myEvaluationView.swift; sourceTree = "<group>"; };
-		257CF54029D42D84008787F8 /* sample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sample.swift; sourceTree = "<group>"; };
 		25828BF729BDB4930077FBDB /* SKHUAZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKHUAZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25828BFA29BDB4930077FBDB /* SKHUAZApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKHUAZApp.swift; sourceTree = "<group>"; };
 		25828BFC29BDB4930077FBDB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -104,7 +109,18 @@
 		25FDD58929C1976F00D3C132 /* setModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setModeView.swift; sourceTree = "<group>"; };
 		25FDD58B29C1978600D3C132 /* communityRuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = communityRuleView.swift; sourceTree = "<group>"; };
 		25FDD58D29C1979B00D3C132 /* quitAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quitAccountView.swift; sourceTree = "<group>"; };
+		3ADD764D28236C96337DCD1A /* Pods_SKHUAZ_SKHUAZUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SKHUAZ_SKHUAZUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		45DD576BDA1673AB72F3B7B5 /* Pods_SKHUAZTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SKHUAZTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		56010323B08146969CC98C1E /* Pods_SKHUAZ.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SKHUAZ.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D7DA3FE6BC8749529129E51 /* Pods-SKHUAZ-SKHUAZUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUAZ-SKHUAZUITests.release.xcconfig"; path = "Target Support Files/Pods-SKHUAZ-SKHUAZUITests/Pods-SKHUAZ-SKHUAZUITests.release.xcconfig"; sourceTree = "<group>"; };
+		6BE94635F69F55C46001416B /* Pods-SKHUAZTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUAZTests.release.xcconfig"; path = "Target Support Files/Pods-SKHUAZTests/Pods-SKHUAZTests.release.xcconfig"; sourceTree = "<group>"; };
 		9EB6E13B29DD478F008A02AA /* RestAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestAPI.swift; sourceTree = SOURCE_ROOT; };
+		9EDB447829E1D17D00001AB0 /* PostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAPI.swift; sourceTree = SOURCE_ROOT; };
+		9EDB447C29E29D6400001AB0 /* sample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sample.swift; sourceTree = "<group>"; };
+		B400E60D7D72016833039512 /* Pods-SKHUAZ-SKHUAZUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUAZ-SKHUAZUITests.debug.xcconfig"; path = "Target Support Files/Pods-SKHUAZ-SKHUAZUITests/Pods-SKHUAZ-SKHUAZUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		C3701BA5D1B47BD256596D97 /* Pods-SKHUAZ.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUAZ.release.xcconfig"; path = "Target Support Files/Pods-SKHUAZ/Pods-SKHUAZ.release.xcconfig"; sourceTree = "<group>"; };
+		D2B9F7697B76C9502296BDA6 /* Pods-SKHUAZTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUAZTests.debug.xcconfig"; path = "Target Support Files/Pods-SKHUAZTests/Pods-SKHUAZTests.debug.xcconfig"; sourceTree = "<group>"; };
+		ED94CDD11D13F419CA783B86 /* Pods-SKHUAZ.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SKHUAZ.debug.xcconfig"; path = "Target Support Files/Pods-SKHUAZ/Pods-SKHUAZ.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +128,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EDB447729E1636700001AB0 /* SwiftyJSON in Frameworks */,
+				3269C83B6234A336C93DB4F1 /* Pods_SKHUAZ.framework in Frameworks */,
+				9EDB447429E1597900001AB0 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +138,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0369C8ABF968139E77CC2EFB /* Pods_SKHUAZTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,6 +146,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				834D589E6D960406A2B5FBAC /* Pods_SKHUAZ_SKHUAZUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +229,8 @@
 				25828C0A29BDB4940077FBDB /* SKHUAZTests */,
 				25828C1429BDB4940077FBDB /* SKHUAZUITests */,
 				25828BF829BDB4930077FBDB /* Products */,
+				336C6B030921FAFCA19767BF /* Pods */,
+				3FE6FD8E95897A2425CDB014 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -238,6 +261,7 @@
 				257589C029BEFDF900A604A6 /* Setting */,
 				25828BFE29BDB4940077FBDB /* Assets.xcassets */,
 				25828C0029BDB4940077FBDB /* Preview Content */,
+				9EDB447C29E29D6400001AB0 /* sample.swift */,
 			);
 			path = SKHUAZ;
 			sourceTree = "<group>";
@@ -270,15 +294,38 @@
 		25CC221129D3251F00F0B1D0 /* SignUpView_test */ = {
 			isa = PBXGroup;
 			children = (
-				257CF54029D42D84008787F8 /* sample.swift */,
 			);
 			path = SignUpView_test;
+			sourceTree = "<group>";
+		};
+		336C6B030921FAFCA19767BF /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				ED94CDD11D13F419CA783B86 /* Pods-SKHUAZ.debug.xcconfig */,
+				C3701BA5D1B47BD256596D97 /* Pods-SKHUAZ.release.xcconfig */,
+				B400E60D7D72016833039512 /* Pods-SKHUAZ-SKHUAZUITests.debug.xcconfig */,
+				5D7DA3FE6BC8749529129E51 /* Pods-SKHUAZ-SKHUAZUITests.release.xcconfig */,
+				D2B9F7697B76C9502296BDA6 /* Pods-SKHUAZTests.debug.xcconfig */,
+				6BE94635F69F55C46001416B /* Pods-SKHUAZTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		3FE6FD8E95897A2425CDB014 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				56010323B08146969CC98C1E /* Pods_SKHUAZ.framework */,
+				3ADD764D28236C96337DCD1A /* Pods_SKHUAZ_SKHUAZUITests.framework */,
+				45DD576BDA1673AB72F3B7B5 /* Pods_SKHUAZTests.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		9EB6E13A29DD4773008A02AA /* API */ = {
 			isa = PBXGroup;
 			children = (
 				9EB6E13B29DD478F008A02AA /* RestAPI.swift */,
+				9EDB447829E1D17D00001AB0 /* PostAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -290,6 +337,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25828C1B29BDB4940077FBDB /* Build configuration list for PBXNativeTarget "SKHUAZ" */;
 			buildPhases = (
+				96687A4CB76198FAC43D8496 /* [CP] Check Pods Manifest.lock */,
 				25828BF329BDB4930077FBDB /* Sources */,
 				25828BF429BDB4930077FBDB /* Frameworks */,
 				25828BF529BDB4930077FBDB /* Resources */,
@@ -299,6 +347,10 @@
 			dependencies = (
 			);
 			name = SKHUAZ;
+			packageProductDependencies = (
+				9EDB447329E1597900001AB0 /* Alamofire */,
+				9EDB447629E1636700001AB0 /* SwiftyJSON */,
+			);
 			productName = SKHUAZ;
 			productReference = 25828BF729BDB4930077FBDB /* SKHUAZ.app */;
 			productType = "com.apple.product-type.application";
@@ -307,6 +359,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25828C1E29BDB4940077FBDB /* Build configuration list for PBXNativeTarget "SKHUAZTests" */;
 			buildPhases = (
+				C831654196432BF458D8DD4B /* [CP] Check Pods Manifest.lock */,
 				25828C0329BDB4940077FBDB /* Sources */,
 				25828C0429BDB4940077FBDB /* Frameworks */,
 				25828C0529BDB4940077FBDB /* Resources */,
@@ -325,6 +378,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 25828C2129BDB4940077FBDB /* Build configuration list for PBXNativeTarget "SKHUAZUITests" */;
 			buildPhases = (
+				D817B4CC23A6EF56B1E69A21 /* [CP] Check Pods Manifest.lock */,
 				25828C0D29BDB4940077FBDB /* Sources */,
 				25828C0E29BDB4940077FBDB /* Frameworks */,
 				25828C0F29BDB4940077FBDB /* Resources */,
@@ -371,6 +425,10 @@
 				Base,
 			);
 			mainGroup = 25828BEE29BDB4930077FBDB;
+			packageReferences = (
+				9EDB447229E1597900001AB0 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				9EDB447529E1636700001AB0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+			);
 			productRefGroup = 25828BF829BDB4930077FBDB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -408,6 +466,75 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		96687A4CB76198FAC43D8496 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SKHUAZ-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C831654196432BF458D8DD4B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SKHUAZTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D817B4CC23A6EF56B1E69A21 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SKHUAZ-SKHUAZUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		25828BF329BDB4930077FBDB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -418,6 +545,7 @@
 				25FDD58E29C1979B00D3C132 /* quitAccountView.swift in Sources */,
 				2528F4A829BF7F1B00A148D2 /* CurriculumSWView.swift in Sources */,
 				25828C2929BDB5190077FBDB /* SignUpView.swift in Sources */,
+				9EDB447929E1D17D00001AB0 /* PostAPI.swift in Sources */,
 				256CBF4B29BEF8550081AC2B /* Root_Write_yesG.swift in Sources */,
 				25FDD58429C196FB00D3C132 /* authView.swift in Sources */,
 				25FDD58829C1974700D3C132 /* setalarmView.swift in Sources */,
@@ -435,11 +563,11 @@
 				257589BF29BEFD1200A604A6 /* EvalutionView.swift in Sources */,
 				257589C729BF00EB00A604A6 /* LisTView.swift in Sources */,
 				256CBF4729BEF8270081AC2B /* Root_Detail.swift in Sources */,
+				9EDB447D29E29D6400001AB0 /* sample.swift in Sources */,
 				25FDD58C29C1978600D3C132 /* communityRuleView.swift in Sources */,
 				25828BFB29BDB4930077FBDB /* SKHUAZApp.swift in Sources */,
 				257589C329BF00B800A604A6 /* EvaluationDetailView.swift in Sources */,
 				25828C3229BDB69D0077FBDB /* CurriculumView.swift in Sources */,
-				257CF54129D42D84008787F8 /* sample.swift in Sources */,
 				2528F4A629BF7F0C00A148D2 /* CurriculumJavaView.swift in Sources */,
 				25828C2E29BDB5EC0077FBDB /* FindView.swift in Sources */,
 				25E77CE129DACFFC0004A3C4 /* SignUpTest.swift in Sources */,
@@ -597,6 +725,7 @@
 		};
 		25828C1C29BDB4940077FBDB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ED94CDD11D13F419CA783B86 /* Pods-SKHUAZ.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -609,7 +738,6 @@
 				INFOPLIST_FILE = SKHUAZ/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -629,6 +757,7 @@
 		};
 		25828C1D29BDB4940077FBDB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C3701BA5D1B47BD256596D97 /* Pods-SKHUAZ.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -641,7 +770,6 @@
 				INFOPLIST_FILE = SKHUAZ/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -661,6 +789,7 @@
 		};
 		25828C1F29BDB4940077FBDB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D2B9F7697B76C9502296BDA6 /* Pods-SKHUAZTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -681,6 +810,7 @@
 		};
 		25828C2029BDB4940077FBDB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6BE94635F69F55C46001416B /* Pods-SKHUAZTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -701,6 +831,7 @@
 		};
 		25828C2229BDB4940077FBDB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B400E60D7D72016833039512 /* Pods-SKHUAZ-SKHUAZUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -719,6 +850,7 @@
 		};
 		25828C2329BDB4940077FBDB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D7DA3FE6BC8749529129E51 /* Pods-SKHUAZ-SKHUAZUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -775,6 +907,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9EDB447229E1597900001AB0 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		9EDB447529E1636700001AB0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9EDB447329E1597900001AB0 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9EDB447229E1597900001AB0 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		9EDB447629E1636700001AB0 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9EDB447529E1636700001AB0 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 25828BEF29BDB4930077FBDB /* Project object */;
 }

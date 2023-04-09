@@ -1,5 +1,7 @@
 import Foundation
 import Combine
+import Alamofire
+import SwiftyJSON
 
 struct SignUp: Hashable, Codable {
     
@@ -12,6 +14,7 @@ struct SignUp: Hashable, Codable {
     let department: Bool
     let major_minor: Bool
     let double_major: Bool
+    let Semester: String
 }
 
 
@@ -21,47 +24,34 @@ struct Login: Hashable, Decodable {
     let login: Bool
     let message: String
     let major_minor: Bool
-    let major2: String?
-    let major1: String?
+    let major2: String
+    let major1: String
     let password: String
     let graduate: Bool
     let nickname: String
-    let semester: Int
     let department: Bool
     let email: String
-//
-//    enum CodingKeys: String, CodingKey {
-//        case double_major = "double_major"
-//        case sessionId = "sessionId"
-//        case login = "login"
-//        case message = "message"
-//        case major_minor = "major_minor"
-//        case major2 = "major2"
-//        case major1 = "major1"
-//        case password = "password"
-//        case graduate = "graduate"
-//        case nickname = "nickname"
-//        case semester = "semester"
-//        case department = "department"
-//        case email = "email"
-//    }
+    let Semester: String
 }
 
 
 class RestAPI: ObservableObject {
-    
+    static var UserID: Any = ""
     static let shared = RestAPI()
-//    @Published var loginsuccess: Bool = false
+    //    @Published var loginsuccess: Bool = false
     @Published var signup: [SignUp] = []
     @Published var login: [Login] = []
     @Published var date: String = "" //날짜
     @Published var materialResponse: String = ""
-    static var sessionId: Any = ""
     
     //23.04.08 추가
     static var UserEmail: Any = ""
     @Published var posts: [Login] = []
     static var LogineSuccess: Bool = false
+    
+    
+    
+    
     
     //MARK: 회원가입
     func Signup(parameters: [String: Any]) {
@@ -84,7 +74,7 @@ class RestAPI: ObservableObject {
             do {
                 let posts = try String(data: data, encoding: .utf8)!
                 DispatchQueue.main.async {
-                print(posts)
+                    print(posts)
                 }
             }
             catch {
@@ -126,53 +116,131 @@ class RestAPI: ObservableObject {
     
     
     //MARK: 로그인
-    func LoginSuccess(parameters: [String: Any],completion: @escaping (Bool) -> Void) {
-        
-        guard let url = URL(string:
-                                "http://skhuaz.duckdns.org/users/login") else {
+    func LoginSuccess(parameters: [String: Any], userData: UserData, completion: @escaping (Bool) -> ()) {
+        // 로그인 API 호출
+        let url = "http://skhuaz.duckdns.org/users/login"
+        let headers: HTTPHeaders = [
+            "Content-Type": "application/json"
+        ]
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            switch response.result {
+                
+            case .success(let value):
+                RestAPI.LogineSuccess = true
+                let json = JSON(value)
+                print("userData 가공전 json : \(json)")
+                if json != "" {
+                    // 로그인 성공
+                    userData.double_major = json["double_major"].boolValue
+                    userData.sessionId = json["sessionId"].stringValue
+                    userData.major_minor = json["major_minor"].boolValue
+                    userData.major2 = json["major2"].stringValue
+                    userData.major1 = json["major1"].stringValue
+                    userData.password = json["password"].stringValue
+                    userData.graduate = json["graduate"].boolValue
+                    userData.nickname = json["nickname"].stringValue
+                    userData.department = json["department"].boolValue
+                    userData.email = json["email"].stringValue
+                    userData.semester = json["semester"].stringValue
+                    
+
+                    completion(true)
+                    
+                } else {
+                    // 로그인 실패
+                    completion(false)
+                }
+            case .failure(let error):
+                print("로그인 실패 에러코드 : ",error)
+                print(response.result)
+                
+                completion(false)
+            }
+        }
+    }
+    
+    /**로그아웃**/
+    func logout(completion: @escaping (Bool) -> Void) {
+                guard let url = URL(string: "http://skhuaz.duckdns.org/user/logout") else {
             return
         }
-        
-        
-        let data = try! JSONSerialization.data(withJSONObject: parameters)
-        
-        
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.httpBody = data
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        //로그인했을 때 userid에 email 값을 저장해둠
-        //추후 로그아웃 했을 때에 꼭 초기화 해줘야함.
-        
-        RestAPI.UserEmail = parameters["email"]!
-        print("로그인 된 User Email 값 : \(RestAPI.UserEmail)")
-        let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-            guard let data = data, error == nil else {
-                return
-                
+//        request.setValue("sessionId=\(RestAPI.sessionId)", forHTTPHeaderField: "Cookie") // 쿠키 설정
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
+                if let error = error {
+                        print("Error: \(error.localizedDescription)")
+                    } else {
+                        print("HTTP status code: \((response as? HTTPURLResponse)?.statusCode ?? -1)")
+                    }
+                    completion(false)
+                    return
+            }
+            print("HTTP status code: \((response as? HTTPURLResponse)?.statusCode ?? -1)")
+            // 세션 아이디 삭제
+            let cookieStorage = HTTPCookieStorage.shared
+            if let cookies = cookieStorage.cookies(for: url) {
+                for cookie in cookies {
+                    cookieStorage.deleteCookie(cookie)
+                }
             }
             
-            do {
-                let posts = try JSONDecoder().decode(Login.self, from: data)
-                DispatchQueue.main.async { [self] in
-                    self?.posts = [posts]
-                }
-                print("Login 끝나고 난 후 posts[Login] 값의 타입 : \(type(of:posts))") //로그인 구조체 타입.
-                print(posts)
-            }
-            catch {
-                print(error)
-            }
-            do {
-                let login = try JSONDecoder().decode(Login.self, from: data)
-                // 변환된 Login 객체를 사용해 필요한 작업을 수행합니다.
-            } catch {
-                print("Error: \(error.localizedDescription)")
-            }
+            completion(true)
+
         }
         task.resume()
     }
+
+    //    func LoginSuccess(parameters: [String: Any], completion: @escaping (Bool) -> ()) {
+    //
+    //        guard let url = URL(string:
+    //                                "http://skhuaz.duckdns.org/users/login") else {
+    //            return
+    //        }
+    //
+    //
+    //        let data = try! JSONSerialization.data(withJSONObject: parameters)
+    //
+    //
+    //        var request = URLRequest(url: url)
+    //        request.httpMethod = "POST"
+    //        request.httpBody = data
+    //        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    //
+    //        //로그인했을 때 userid에 email 값을 저장해둠
+    //        //추후 로그아웃 했을 때에 꼭 초기화 해줘야함.
+    //
+    //        RestAPI.UserEmail = parameters["email"]!
+    //        print("로그인 된 User Email 값 : \(RestAPI.UserEmail)")
+    //        let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+    //            guard let data = data, error == nil else {
+    //                return
+    //
+    //            }
+    //
+    //            do {
+    //                let posts = try JSONDecoder().decode(Login.self, from: data)
+    //                DispatchQueue.main.async { [self] in
+    //                    self?.posts = [posts]
+    //                }
+    //                print("Login 끝나고 난 후 posts[Login] 값의 타입 : \(type(of:posts))") //로그인 구조체 타입.
+    //                print(posts)
+    //            }
+    //            catch {
+    //                print(error)
+    //            }
+    //            do {
+    //                let login = try JSONDecoder().decode(Login.self, from: data)
+    //                // 변환된 Login 객체를 사용해 필요한 작업을 수행합니다.
+    //            } catch {
+    //                print("Error: \(error.localizedDescription)")
+    //            }
+    //        }
+    //        task.resume()
+    //    }
     //    func logout(completion: @escaping (Bool) -> Void) {
     //        guard let url = URL(string: "http://skhuaz.duckdns.org/users/logout") else {
     //            return
@@ -206,18 +274,30 @@ class RestAPI: ObservableObject {
 
 
 class UserData: ObservableObject {
-    static var double_major: Any = ""
-    static var sessionId: Any = ""
-    static var login: Any = ""
-    static var message: Any = ""
-    static var major_minor: Any = ""
-    static var major2: Any = ""
-    static var major1: Any = ""
-    static var password: Any = ""
-    static var graduate: Any = ""
-    static var nickname: Any = ""
-    static var semester: Any = ""
-    static var department: Any = ""
-    static var email: Any = ""
+    @Published var double_major: Bool = false
+    @Published var sessionId: String = ""
+    @Published var major_minor: Bool = false
+    @Published var major2: String? = nil
+    @Published var major1: String? = nil
+    @Published var password: String = ""
+    @Published var graduate: Bool = false
+    @Published var nickname: String = ""
+    @Published var semester: String = ""
+    @Published var department: Bool = false
+    @Published var email: String = ""
     
+    func setData(from response: UserData) {
+        self.double_major = response.double_major
+        self.sessionId = response.sessionId
+        self.major_minor = response.major_minor
+        self.major2 = response.major2
+        self.major1 = response.major1
+        self.password = response.password
+        self.graduate = response.graduate
+        self.nickname = response.nickname
+        self.department = response.department
+        self.email = response.email
+        self.semester = response.semester
+    }
 }
+
