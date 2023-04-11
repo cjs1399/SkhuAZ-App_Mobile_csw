@@ -4,13 +4,14 @@ import SwiftUI
 struct SignUpView: View {
     func checkEmail(str: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@office.skhu.ac.kr"
-        return  NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: str)
+        return  NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with:str)
     }
     @Environment(\.presentationMode) var presention
     //
     @StateObject var api = RestAPI()
     @State var password: String = ""
     
+    @Environment(\.presentationMode) var presentationMode
     // MARK: - 닉네임
     @State var Nickname: String = ""
     @State private var isDuplicate: Bool?
@@ -75,6 +76,8 @@ struct SignUpView: View {
                         TextField("인증번호 입력", text: $code)
                             .frame(width: 350, height: 50)
                             .textFieldStyle(.roundedBorder)
+                            .autocapitalization(.none) // 자동으로 대문자 설정 안하기
+                            .disableAutocorrection(true) // 자동완성 끄기
                         HStack{
                             
                             Spacer()
@@ -206,6 +209,7 @@ struct SignUpView: View {
                         .background(Color(uiColor: .secondarySystemBackground))
                         .cornerRadius(10)
                         .autocapitalization(.none) // 자동으로 대문자 설정 안하기
+                        .disableAutocorrection(true) // 자동완성 끄기
                     Button{
                         // 5. 닉네임 중복확인 API 요청
                         let urlString = "http://skhuaz.duckdns.org/checkDuplicate/\(Nickname)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
@@ -265,7 +269,8 @@ struct SignUpView: View {
                         .background(Color(uiColor: .secondarySystemBackground))
                         .cornerRadius(10)
                         .keyboardType(.emailAddress)
-                        .autocapitalization(.none)
+                        .autocapitalization(.none) // 자동으로 대문자 설정 안하기
+                        .disableAutocorrection(true) // 자동완성 끄기
                     Button{
                         if checkEmail(str: email){
                             CheckMessage = ""

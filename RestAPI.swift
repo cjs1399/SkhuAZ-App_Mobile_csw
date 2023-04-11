@@ -80,35 +80,6 @@ class RestAPI: ObservableObject {
         }
         task.resume()
     }
-    //MARK: 회원탈퇴
-    //    func deleteAccount(parameters: [String: Any]) {
-    //        guard let url = URL(string: "http://skhuaz.duckdns.org/delete") else { return }
-    //
-    //        let data = try! JSONSerialization.data(withJSONObject: parameters)
-    //
-    //        var request = URLRequest(url: url)
-    //        request.httpMethod = "DELETE"
-    //        request.httpBody = data
-    //        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    //        let sessionID = getSessionID()
-    //        request.addValue("JSESSIONID=\(sessionID)", forHTTPHeaderField: "Cookie")
-    //        // Add session ID to HTTP headers
-    //        let task = URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
-    //            guard let data = data, error == nil else {
-    //                return
-    //            }
-    //            do {
-    //                let posts = try String(data: data, encoding: .utf8)!
-    //                DispatchQueue.main.async {
-    //                    print(posts)
-    //                }
-    //            }
-    //            catch {
-    //                print(error)
-    //            }
-    //        }
-    //        task.resume()
-    //    }
     
     
     

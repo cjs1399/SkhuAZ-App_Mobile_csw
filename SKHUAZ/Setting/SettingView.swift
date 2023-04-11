@@ -25,8 +25,6 @@ struct SettingView: View {
                     .padding(.bottom, 5)
                 NavigationLink {
                     authView()
-                        .navigationBarBackButtonHidden(true)
-                        .navigationBarHidden(true)
                 } label: {
                     HStack{
                         Image("setprofile")
@@ -61,7 +59,7 @@ struct SettingView: View {
                             print("에러발생")
                         }
                     }
-                    self.presentationMode.wrappedValue.dismiss()
+                    
                 }) {
                     HStack{
                         Image(systemName: "arrowshape.turn.up.left.circle")
@@ -70,36 +68,39 @@ struct SettingView: View {
                         Text("로그아웃")
                     }
                 }
-//                .background(
-//                    NavigationLink(destination: ContentView(), isActive: $isactive) {
-//                        EmptyView()
-//                    }
-//                )
                 .buttonStyle(redSettingecButton())
                 
                 
                 
                 
-                Button {
-                    self.presentationMode.wrappedValue.dismiss()
+                NavigationLink {
+                    deleteCheck()
                 } label: {
                     Text("회원탈퇴")
                     
                 }
-                .buttonStyle(redSettingecButton())
-                
-                NavigationLink {
-                } label: {
-                    HStack{
-                        Text("")
-                            .frame(width: 40,height: 40,alignment: .leading)
-                        
-                    }
-                    
+                //                NavigationLink {
+                //                    quitAccountView()
+                //                } label: {
+                //                    Text("회원 탈퇴")
+                //                }
+                .frame(width: UIScreen.main.bounds.width / 4 * 3 , height: UIScreen.main.bounds.height / 50.0)
+                .padding()
+                .background(Color.white)
+                .clipShape(Rectangle())
+                .overlay { // <-
+                    Rectangle().stroke(Color.black, lineWidth: 5)
                 }
+                .cornerRadius(5)
+                .font(.system(size: 15, weight: .semibold))
                 
                 .foregroundColor(.mainButtonColor)
-                Text("© 2023. ( PBCH^2YM ) all right reserved")
+                Button {
+                    self.presentationMode.wrappedValue.dismiss()
+                } label: {
+                    Text("© 2023. ( PBCH^2YM ) all right reserved")
+                }
+
                 Text("")
             }
         }

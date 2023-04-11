@@ -51,54 +51,6 @@ class PostAPI: ObservableObject {
     }
     
     
-        
-        
-        
-//        func fetchData(){
-//            // 요청을 보낼 URL 생성
-//            guard let url = URL(string: "https://your-api-url.com/data") else {
-//                fatalError("Invalid URL")
-//            }
-//
-//            // 요청 생성
-//            var request = URLRequest(url: url)
-//            request.httpMethod = "GET"
-//
-//            // URLSession을 사용하여 요청 보내기
-//            URLSession.shared.dataTask(with: request) { data, response, error in
-//                // 에러 처리
-//                if let error = error {
-//                    print("Error: \(error.localizedDescription)")
-//                    return
-//                }
-//
-//                // 응답 처리
-//                guard let data = data else {
-//                    print("No data in response")
-//                    return
-//                }
-//
-//                // 받아온 데이터를 디코딩
-//                do {
-//                    let decoder = JSONDecoder()
-//                    decoder.keyDecodingStrategy = .convertFromSnakeCase
-//                    let results = try decoder.decode([Results].self, from: data)
-//                    print("현재 results : \(results)")
-//
-//                    // 받아온 데이터 처리ㅌ
-//                    for article in results.articles {
-//                        print(article.id)
-//                        print(article.lectureName)
-//                        // 나머지 데이터도 마찬가지로 처리
-//                    }
-//                } catch let error {
-//                    if let httpResponse = response as? HTTPURLResponse {
-//                        print("Status code: \(httpResponse.statusCode)")
-//                    }
-//                    print("Error decoding response: \(error.localizedDescription)")
-//                }
-//            }.resume()
-//        }
     func fetchData() {
         guard let url = URL(string: "http://skhuaz.duckdns.org/AllEvaluation") else {
             fatalError("Invalid URL")
