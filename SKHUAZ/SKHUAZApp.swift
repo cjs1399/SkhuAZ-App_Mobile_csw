@@ -11,7 +11,8 @@ import SwiftUI
 struct SKHUAZApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(UserData())
+            ContentView().environmentObject(UserData()
+            )
         }
     }
 }

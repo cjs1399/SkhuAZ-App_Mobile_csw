@@ -30,7 +30,7 @@ struct ContentView: View {
                             LoginView(login_onoff: false)
                         }
                     } else {
-                        Image("logo").resizable().scaledToFit().frame(width: 120, height: 100)
+                        
                     }
                 }
                 .onAppear{

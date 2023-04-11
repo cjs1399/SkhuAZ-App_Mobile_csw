@@ -163,7 +163,7 @@ struct user_post: View{
                 Text("내가 최근 쓴 강의평")
                 Spacer()
                 Button {
-                    self.index = 1
+                    index = 1
                 } label: {
                     Text("더 보기")
                 }

@@ -4,16 +4,60 @@ import SwiftUI
 struct LisTView: View {
     @State var test: String = ""
     @State var testpoint: Int = 4
+    
+    @StateObject private var postcall = PostAPI.shared
+    
     var body: some View{
+        
+//        let lectureName: String
+//        let prfsName: String
+//        let classYear: String
+//        let semester: String
+//        let department: String
+//        let is_major_required: Bool
+//        let teamPlay: String
+//        let task: String
+//        let practice: String
+//        let presentation: String
+//        let review: String
+        
+//        NavigationView{
+//                    List{
+//
+//                        ForEach(network.posts, id: \.self) { result in
+//                            HStack{
+//                                Text(result.lectureName)
+//                                    .bold()
+//                            }.padding(3)
+//                        }
+//                    }
+//                }.onAppear {
+//                    network.fetchData()
+//                }
+        
+        Button(action: {
+            // 이메일, 비밀번호 로그인 api 파라미터로 보내주기
+            postcall.fetchData()
+            
+        }) {
+            Text("불러오기 테스트")
+                .frame(width: 330, height: 10)
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding()
+                .background(Color(red: 0.603, green: 0.756, blue: 0.819))
+                .cornerRadius(10)
+        }
+        
         Group{
-            VStack(spacing: 10){
+            VStack{
                 Group{
                     HStack{
                         Text("강의명 | 교수명 | 수강학기")
                         Spacer()
                         Text("☆★★★★")
                     }
-                    .font(.system(size: 14))
+                    .font(.system(size: 12))
                     .padding()
                 }
                 .frame(width: 320, height: 40)
@@ -45,46 +89,19 @@ struct LisTView: View {
                     }
                 }
                 .frame(width: 320, height: 100)
-                Group{
-                    TextField("강의총평 100자 제한", text: $test)
-                        .padding([.bottom], 30)
-                        .padding([.leading], 10)
-                        .frame(width: 320, height: 60)
-                        .font(.system(size: 10))
-                        .background(Color(uiColor: .secondarySystemBackground))
-                }
-                .padding(.bottom, 10)
                 HStack{
                     Text("작성자 | 작성일")
                         .padding(.leading, 15)
                     Spacer()
-//                    Button(action: {}, label: {
-//                        Text("추천")
-//                            .padding(.horizontal, 20)
-//                    })
-//                    .foregroundColor(.black)
-//                    .frame(width: 85, height: 24)
-//                    .background(Color(hex: 0x9AC1D1))
-//                    .cornerRadius(10)
-//                    Button(action: {}, label: {
-//                        Text("비추천")
-//                            .padding(.horizontal, 20)
-//                    })
-//                    .foregroundColor(.black)
-//                    .frame(width: 85, height: 24)
-//                    .background(Color(hex: 0xEFEFEF))
-//                    .cornerRadius(10)
-//                    .padding(.trailing, 15)
                 }
                 .font(.system(size: 12))
 
-            }
-
+            }.padding()
         }
-        .frame(width: 350, height: 300)
+        .frame(width: 350)
         .overlay(
                 RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color.black, lineWidth: 1))
+                    .stroke(Color(hex: 0x9AC1D1), lineWidth: 2))
     }
 }
 struct chartView: View{

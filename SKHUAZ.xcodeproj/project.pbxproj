@@ -18,7 +18,6 @@
 		257589C329BF00B800A604A6 /* EvaluationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257589C229BF00B800A604A6 /* EvaluationDetailView.swift */; };
 		257589C529BF00D100A604A6 /* CheckBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257589C429BF00D100A604A6 /* CheckBoxView.swift */; };
 		257589C729BF00EB00A604A6 /* LisTView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257589C629BF00EB00A604A6 /* LisTView.swift */; };
-		257589C929BF00FD00A604A6 /* meNuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257589C829BF00FD00A604A6 /* meNuView.swift */; };
 		257589CB29BF010D00A604A6 /* myEvaluationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257589CA29BF010D00A604A6 /* myEvaluationView.swift */; };
 		25828BFB29BDB4930077FBDB /* SKHUAZApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25828BFA29BDB4930077FBDB /* SKHUAZApp.swift */; };
 		25828BFD29BDB4930077FBDB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25828BFC29BDB4930077FBDB /* ContentView.swift */; };
@@ -35,7 +34,6 @@
 		25828C3429BDB6A50077FBDB /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25828C3329BDB6A50077FBDB /* MainView.swift */; };
 		25828C3629BDB6AD0077FBDB /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25828C3529BDB6AD0077FBDB /* RootView.swift */; };
 		25828C3829BDB6BA0077FBDB /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25828C3729BDB6BA0077FBDB /* SettingView.swift */; };
-		25E77CE129DACFFC0004A3C4 /* SignUpTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25E77CE029DACFFC0004A3C4 /* SignUpTest.swift */; };
 		25FDD58229C1963F00D3C132 /* extensionPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FDD58129C1963F00D3C132 /* extensionPalette.swift */; };
 		25FDD58429C196FB00D3C132 /* authView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FDD58329C196FB00D3C132 /* authView.swift */; };
 		25FDD58629C1971900D3C132 /* editProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25FDD58529C1971900D3C132 /* editProfileView.swift */; };
@@ -81,7 +79,6 @@
 		257589C229BF00B800A604A6 /* EvaluationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvaluationDetailView.swift; sourceTree = "<group>"; };
 		257589C429BF00D100A604A6 /* CheckBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBoxView.swift; sourceTree = "<group>"; };
 		257589C629BF00EB00A604A6 /* LisTView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LisTView.swift; sourceTree = "<group>"; };
-		257589C829BF00FD00A604A6 /* meNuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = meNuView.swift; sourceTree = "<group>"; };
 		257589CA29BF010D00A604A6 /* myEvaluationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myEvaluationView.swift; sourceTree = "<group>"; };
 		25828BF729BDB4930077FBDB /* SKHUAZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SKHUAZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		25828BFA29BDB4930077FBDB /* SKHUAZApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKHUAZApp.swift; sourceTree = "<group>"; };
@@ -101,7 +98,6 @@
 		25828C3329BDB6A50077FBDB /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		25828C3529BDB6AD0077FBDB /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		25828C3729BDB6BA0077FBDB /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
-		25E77CE029DACFFC0004A3C4 /* SignUpTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpTest.swift; sourceTree = "<group>"; };
 		25FDD58129C1963F00D3C132 /* extensionPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensionPalette.swift; sourceTree = "<group>"; };
 		25FDD58329C196FB00D3C132 /* authView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authView.swift; sourceTree = "<group>"; };
 		25FDD58529C1971900D3C132 /* editProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editProfileView.swift; sourceTree = "<group>"; };
@@ -172,7 +168,6 @@
 				257589C229BF00B800A604A6 /* EvaluationDetailView.swift */,
 				257589C429BF00D100A604A6 /* CheckBoxView.swift */,
 				257589C629BF00EB00A604A6 /* LisTView.swift */,
-				257589C829BF00FD00A604A6 /* meNuView.swift */,
 				257589CA29BF010D00A604A6 /* myEvaluationView.swift */,
 			);
 			path = Evalution;
@@ -199,11 +194,9 @@
 		257589BD29BEFCBE00A604A6 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				25CC221129D3251F00F0B1D0 /* SignUpView_test */,
 				25828C2629BDB5090077FBDB /* LoginView.swift */,
 				25828C2829BDB5190077FBDB /* SignUpView.swift */,
 				25828C2D29BDB5EC0077FBDB /* FindView.swift */,
-				25E77CE029DACFFC0004A3C4 /* SignUpTest.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -289,13 +282,6 @@
 				25828C1729BDB4940077FBDB /* SKHUAZUITestsLaunchTests.swift */,
 			);
 			path = SKHUAZUITests;
-			sourceTree = "<group>";
-		};
-		25CC221129D3251F00F0B1D0 /* SignUpView_test */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SignUpView_test;
 			sourceTree = "<group>";
 		};
 		336C6B030921FAFCA19767BF /* Pods */ = {
@@ -541,7 +527,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9EB6E13C29DD478F008A02AA /* RestAPI.swift in Sources */,
-				257589C929BF00FD00A604A6 /* meNuView.swift in Sources */,
 				25FDD58E29C1979B00D3C132 /* quitAccountView.swift in Sources */,
 				2528F4A829BF7F1B00A148D2 /* CurriculumSWView.swift in Sources */,
 				25828C2929BDB5190077FBDB /* SignUpView.swift in Sources */,
@@ -570,7 +555,6 @@
 				25828C3229BDB69D0077FBDB /* CurriculumView.swift in Sources */,
 				2528F4A629BF7F0C00A148D2 /* CurriculumJavaView.swift in Sources */,
 				25828C2E29BDB5EC0077FBDB /* FindView.swift in Sources */,
-				25E77CE129DACFFC0004A3C4 /* SignUpTest.swift in Sources */,
 				256CBF4929BEF83C0081AC2B /* Root_Write_noG.swift in Sources */,
 				25828C3829BDB6BA0077FBDB /* SettingView.swift in Sources */,
 			);

@@ -36,16 +36,13 @@ struct Login: Hashable, Decodable {
 
 
 class RestAPI: ObservableObject {
-    static var UserID: Any = ""
     static let shared = RestAPI()
-    //    @Published var loginsuccess: Bool = false
     @Published var signup: [SignUp] = []
     @Published var login: [Login] = []
     @Published var date: String = "" //날짜
     @Published var materialResponse: String = ""
     
     //23.04.08 추가
-    static var UserEmail: Any = ""
     @Published var posts: [Login] = []
     static var LogineSuccess: Bool = false
     
@@ -287,17 +284,17 @@ class UserData: ObservableObject {
     @Published var email: String = ""
     
     func setData(from response: UserData) {
-        self.double_major = response.double_major
-        self.sessionId = response.sessionId
-        self.major_minor = response.major_minor
-        self.major2 = response.major2
-        self.major1 = response.major1
-        self.password = response.password
-        self.graduate = response.graduate
-        self.nickname = response.nickname
-        self.department = response.department
-        self.email = response.email
-        self.semester = response.semester
+        double_major = response.double_major
+        sessionId = response.sessionId
+        major_minor = response.major_minor
+        major2 = response.major2
+        major1 = response.major1
+        password = response.password
+        graduate = response.graduate
+        nickname = response.nickname
+        department = response.department
+        email = response.email
+        semester = response.semester
     }
 }
 

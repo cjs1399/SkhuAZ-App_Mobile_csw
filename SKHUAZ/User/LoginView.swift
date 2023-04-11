@@ -44,16 +44,16 @@ struct LoginView: View {
                         let parameters: [String: Any] = ["email": email, "password": password]
                         
                         RestAPI.LogineSuccess = true
-                        api.LoginSuccess(parameters: parameters, userData: self.userData) { value in
+                        api.LoginSuccess(parameters: parameters, userData: userData) { value in
                             if value {
                             } else {
-                                self.error = true
+                                error = true
                             }
                         }
                     }
 
                     else {
-                        self.error = true
+                        error = true
                     }
                     
                     login_onoff = RestAPI.LogineSuccess
