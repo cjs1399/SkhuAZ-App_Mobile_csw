@@ -79,11 +79,6 @@ struct SettingView: View {
                     Text("회원탈퇴")
                     
                 }
-                //                NavigationLink {
-                //                    quitAccountView()
-                //                } label: {
-                //                    Text("회원 탈퇴")
-                //                }
                 .frame(width: UIScreen.main.bounds.width / 4 * 3 , height: UIScreen.main.bounds.height / 50.0)
                 .padding()
                 .background(Color.white)

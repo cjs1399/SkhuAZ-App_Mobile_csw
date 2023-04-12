@@ -7,7 +7,7 @@ struct TabbarView: View {
     
     var body: some View {
         TabView(selection: $index) {
-            EvaluationView()
+            EvaluationView(selectedLectureID: 0)
                 .navigationBarBackButtonHidden(true)
                 .navigationBarHidden(true)
                 .tabItem {

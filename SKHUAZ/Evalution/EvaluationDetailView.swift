@@ -320,7 +320,7 @@ struct EvaluationDetail: View {
                                     .cornerRadius(10)
                             }
                             .background(
-                                NavigationLink(destination: EvaluationView(), isActive: $skip) {
+                                NavigationLink(destination: EvaluationView(selectedLectureID: 0), isActive: $skip) {
                                     
                                     EmptyView()
                                 }
@@ -328,7 +328,7 @@ struct EvaluationDetail: View {
                             
                             //저장 버튼
                             Button(action: {
-                                if lectureName != "" && prfsName != "" && classYear != "" && semester != ""{
+                                if lectureName != "" && prfsName != "" && classYear != "" && semester != "" && department != "" && teamPlay != "" && task != "" && practice != "" && presentation != "" && presentation != "" && review != ""{
                                     
                                     let parameters: [String: Any] = ["lectureName": lectureName, "prfsName": prfsName, "classYear": Int(classYear)!, "semester": Int(semester)!, "department": department, "is_major_required": is_major_required, "teamPlay": teamPlay, "task": task, "practice": practice, "presentation": presentation, "review": review]
                                     print("강의평 Create parameters : \(parameters)")
@@ -370,7 +370,7 @@ struct EvaluationDetail: View {
                                 )
                             }
                             .foregroundColor(.white)
-                            .frame(width: 170, height: 50)
+                            .frame(width: 170, height: 40)
                             .background(Color(red: 0.603, green: 0.756, blue: 0.819))
                             .cornerRadius(10)
                         }

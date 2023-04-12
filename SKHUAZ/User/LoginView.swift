@@ -8,7 +8,7 @@ struct LoginView: View {
     @StateObject var api = RestAPI.shared
     @EnvironmentObject var userData: UserData
     @State private var error = false
-    @State var login_onoff: Bool
+    @State var login_onoff: Bool = false
     
     func logintoggle() {
         login_onoff = RestAPI.LogineSuccess
@@ -43,20 +43,22 @@ struct LoginView: View {
                     if email != "" && password != "" {
                         let parameters: [String: Any] = ["email": email, "password": password]
                         
-                        RestAPI.LogineSuccess = true
+                        
                         api.LoginSuccess(parameters: parameters, userData: userData) { value in
                             if value {
                             } else {
                                 error = true
                             }
                         }
+                        RestAPI.LogineSuccess = true
+                        login_onoff = RestAPI.LogineSuccess
                     }
 
                     else {
                         error = true
                     }
                     
-                    login_onoff = RestAPI.LogineSuccess
+                    
                     
                 }) {
                     Text("로그인 api 슈우우우웃~ / 유저데이터 : \(userData.email)")
@@ -67,12 +69,15 @@ struct LoginView: View {
                         .background(Color(red: 0.603, green: 0.756, blue: 0.819))
                         .cornerRadius(10)
                 }
-                .background(
+                if login_onoff == true {
                     NavigationLink(destination: TabbarView(), isActive: $login_onoff) {
                         
                         EmptyView()
                     }
-                )
+                }
+                
+                
+                
                 HStack{
                     Spacer()
                     NavigationLink(

@@ -13,8 +13,9 @@ import SwiftyJSON
 class PostAPI: ObservableObject {
     
     static let shared = PostAPI()
-//    private init() { }
-//    @Published var posts = [Article]()
+//    @Published var result: [Results] = []
+    //    private init() { }
+    //    @Published var posts = [Article]()
     
     
     
@@ -51,99 +52,7 @@ class PostAPI: ObservableObject {
     }
     
     
-    func fetchData() {
-        guard let url = URL(string: "http://skhuaz.duckdns.org/AllEvaluation") else {
-            fatalError("Invalid URL")
-        }
-        var request = URLRequest(url: url)
-                request.httpMethod = "GET"
-
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-                return
-            }
-            
-
-            guard let data = data else {
-                print("No data in response")
-                return
-            }
-            print("현재 do catch 가기 이전 data : \(data)")
-            
-            
-
-            do {
-                let decoder = JSONDecoder()
-                decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let results = try decoder.decode([Results].self, from: data)
-                print("현재 results : \(results)")
-
-                for result in results {
-                    print(result.id)
-                    print(result.lectureName)
-                    // 나머지 데이터도 마찬가지로 처리
-                }
-            } catch let error {
-                print("Error decoding response: \(error.localizedDescription)")
-            }
-        }
-        task.resume()
-    }
-    
-    
 }
-struct Results: Decodable {
-    let id: Int
-    let lectureName: String
-    let prfsName: String
-    let classYear: String
-    let semester: String
-    let department: String
-    let teamPlay: String
-    let task: String
-    let practice: String
-    let presentation: String
-    let userNickname: String
-    let review: String
-    let user: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case id
-        case lectureName = "lecture_name"
-        case prfsName = "prfs_name"
-        case classYear = "class_year"
-        case semester
-        case department
-        case teamPlay = "team_play"
-        case task
-        case practice
-        case presentation
-        case userNickname = "user_nickname"
-        case review
-        case user
-    }
-}
-// MARK: - Results
-//struct Results: Decodable {
-//    let articles: [Article]
-//}
-//
-//// MARK: - Article
-//struct Article: Decodable, Hashable {
-//    let id: Int
-//    let lectureName: String
-//    let prfsName: String
-//    let classYear: String
-//    let semester: String
-//    let department: String
-//    let is_major_required: Bool
-//    let teamPlay: String
-//    let task: String
-//    let practice: String
-//    let presentation: String
-//    let review: String
-//}
 
 
 class PostData: ObservableObject {
@@ -173,5 +82,4 @@ class PostData: ObservableObject {
         review = response.review
     }
 }
-
 
