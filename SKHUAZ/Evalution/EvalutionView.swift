@@ -69,7 +69,7 @@ struct EvaluationView: View {
                 VStack {
                     /**검색창**/
                     HStack{
-                        TextField("강의를 검색해주세요", text: $searchText)
+                        TextField("과목명/교수명/유저이름을 검색해주세요", text: $searchText)
                             .padding(.leading)
                             .frame(width: 300, height: 50)
                             .background(Color(.white))
@@ -166,7 +166,8 @@ struct EvaluationView: View {
                                                 selectedLectureID = lecture.id
                                                 isMoveViewPresented = true // present될 view가 있음을 알리는 변수 값 변경
                                             } label: {
-                                                Text("ID출력")
+                                                Text("자세히")
+                                                    .font(.system(size: 15))
                                             }
                                             .onTapGesture {
                                                 selectedLectureID = lecture.id
@@ -193,56 +194,7 @@ struct EvaluationView: View {
                         .padding()
                     }
                     
-                    
-                    
-                    
-                    
-                    //MARK: -
-                    
-//                    ScrollView (.vertical, showsIndicators: false, content:  {
-//                        VStack(alignment: .leading) {
-//                            ForEach(filteredLectures, id: \.id) { lecture in
-//                                Group{
-//                                    VStack{
-//                                        lectureNameView(for: lecture)
-//                                            .frame(width: 320, height: 40)
-//                                            .background(Color(uiColor: .secondarySystemBackground))
-//
-//                                        chartView(for: lecture)
-//                                            .frame(width: 320, height: 90)
-//                                            .background(Color.white)
-//                                            .alignmentGuide(.leading, computeValue: { d in d[HorizontalAlignment.leading] })
-//
-//                                        HStack{
-//                                            Text("\(lecture.nickname), \(lecture.id)")
-//                                                .padding(.leading, 15)
-//                                            Spacer()
-//                                            Button {
-//                                                print(lecture.id)
-//                                            } label: {
-//                                                Text("ID출력")
-//                                            }
-//
-//                                            NavigationLink(destination: deep_go(lectureID: lecture.id), isActive: $detail) {
-//                                                Text("야호")
-//
-//                                            }
-//
-//
-//                                            Text("")
-//                                                .frame(width:10)
-//
-//                                        }
-//
-//                                    }.padding()
-//                                        .frame(width: 350)
-//                                        .overlay(
-//                                            RoundedRectangle(cornerRadius: 16)
-//                                                .stroke(Color(hex: 0x9AC1D1), lineWidth: 2))
-//                                }
-//                            }
-//                        }.padding()
-//                    })
+                   
                     .padding(.bottom, 15)
                 }
                 .onAppear(perform: {

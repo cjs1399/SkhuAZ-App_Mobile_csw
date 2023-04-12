@@ -23,7 +23,7 @@ struct thirdLecture: Codable, Equatable {
 }
 struct E_modify: View {
     @Binding var selectedLectureID: Int
-    //    @State private var equal = false
+        @State private var equal = false
     @State private var lectureName: String = "" // 과목명
     @State private var prfsName: String = ""    // 교수님 성함
     @State private var classYear: String = "수강년도"   // 수강년도
@@ -36,12 +36,7 @@ struct E_modify: View {
     @State private var presentation: String = "1 upto 5" // 발표
     @State private var review: String = "  총평 : " // 강의총평
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
+        Text("Hello, World! \(selectedLectureID)")
 
-struct E_modify_Previews: PreviewProvider {
-    static var previews: some View {
-        E_modify()
     }
 }
