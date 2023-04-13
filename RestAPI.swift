@@ -16,7 +16,12 @@ struct SignUp: Hashable, Codable {
     let double_major: Bool
     let Semester: String
 }
-
+struct saveRoute: Hashable, Codable {
+    let routeInfo : String
+    enum CodingKeys: String, CodingKey {
+        case routeInfo = "routeInfo"
+    }
+}
 
 struct Login: Hashable, Decodable {
     let double_major: Bool
@@ -43,7 +48,7 @@ class RestAPI: ObservableObject {
     @Published var materialResponse: String = ""
     
     //23.04.08 추가
-    @Published var posts: [Login] = []
+    
     static var LogineSuccess: Bool = false
     
     
@@ -161,83 +166,75 @@ class RestAPI: ObservableObject {
         }
         task.resume()
     }
+    func getRouteInfo(completion: @escaping (Result<String, Error>) -> Void) {
+        // 서버에 보낼 URL을 생성합니다.
+        guard let url = URL(string: "http://skhuaz.duckdns.org/user/routeInfo") else {
+            completion(.failure(NSError(domain: "Invalid URL", code: 0, userInfo: nil)))
+            return
+        }
+        
+        // URLRequest를 생성하고 HTTP 메소드를 GET으로 설정합니다.
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        // URLSession으로 데이터를 받고 응답을 처리합니다.
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            // 서버 응답에서 HTTP 상태 코드를 확인합니다.
+            guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
+                completion(.failure(NSError(domain: "Invalid response", code: 0, userInfo: nil)))
+                return
+            }
+            
+            // 서버로부터 받은 데이터를 문자열로 변환합니다.
+            guard let data = data, let responseString = String(data: data, encoding: .utf8) else {
+                completion(.failure(NSError(domain: "Invalid data", code: 0, userInfo: nil)))
+//                rootText = responseString
+                return
+            }
+            
+            // 받은 데이터를 completion 핸들러에 전달합니다.
+            print("Received route info: \(responseString)")
+            completion(.success(responseString))
+//            RestAPI.rootTest = responseString
 
-    //    func LoginSuccess(parameters: [String: Any], completion: @escaping (Bool) -> ()) {
-    //
-    //        guard let url = URL(string:
-    //                                "http://skhuaz.duckdns.org/users/login") else {
-    //            return
-    //        }
-    //
-    //
-    //        let data = try! JSONSerialization.data(withJSONObject: parameters)
-    //
-    //
-    //        var request = URLRequest(url: url)
-    //        request.httpMethod = "POST"
-    //        request.httpBody = data
-    //        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    //
-    //        //로그인했을 때 userid에 email 값을 저장해둠
-    //        //추후 로그아웃 했을 때에 꼭 초기화 해줘야함.
-    //
-    //        RestAPI.UserEmail = parameters["email"]!
-    //        print("로그인 된 User Email 값 : \(RestAPI.UserEmail)")
-    //        let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-    //            guard let data = data, error == nil else {
-    //                return
-    //
-    //            }
-    //
-    //            do {
-    //                let posts = try JSONDecoder().decode(Login.self, from: data)
-    //                DispatchQueue.main.async { [self] in
-    //                    self?.posts = [posts]
-    //                }
-    //                print("Login 끝나고 난 후 posts[Login] 값의 타입 : \(type(of:posts))") //로그인 구조체 타입.
-    //                print(posts)
-    //            }
-    //            catch {
-    //                print(error)
-    //            }
-    //            do {
-    //                let login = try JSONDecoder().decode(Login.self, from: data)
-    //                // 변환된 Login 객체를 사용해 필요한 작업을 수행합니다.
-    //            } catch {
-    //                print("Error: \(error.localizedDescription)")
-    //            }
-    //        }
-    //        task.resume()
-    //    }
-    //    func logout(completion: @escaping (Bool) -> Void) {
-    //        guard let url = URL(string: "http://skhuaz.duckdns.org/users/logout") else {
-    //            return
-    //        }
-    //        var request = URLRequest(url: url)
-    //        request.httpMethod = "POST"
-    //        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    //        request.setValue(RestAPI.sessionId as! String, forHTTPHeaderField: "sessionId") // 세션 아이디 설정
-    //
-    //        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-    //            guard let data = data, error == nil else {
-    //                completion(false)
-    //                return
-    //            }
-    //            do {
-    //                let result = try JSONDecoder().decode(LogoutResult.self, from: data)
-    //                if result.status == "success" {
-    //                    RestAPI.userid = "" // userid 초기화
-    //                    RestAPI.sessionId = "" // 세션 아이디 초기화
-    //                    completion(true)
-    //                } else {
-    //                    completion(false)
-    //                }
-    //            } catch {
-    //                completion(false)
-    //            }
-    //        }
-    //        task.resume()
-    //    }
+        }
+        task.resume()
+    }
+
+    func saveRouteInfo(info: String, completion: @escaping (Bool) -> Void) {
+        // 서버에 보낼 URL을 생성합니다.
+        guard let url = URL(string: "http://skhuaz.duckdns.org/save-route-info") else {
+            completion(false)
+            return
+        }
+
+        // URLRequest를 생성하고 HTTP 메소드를 POST로 설정합니다.
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+
+        // 요청 헤더에 Content-Type을 JSON으로 설정합니다.
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        // 요청 바디에 보낼 데이터를 JSON 형식으로 만들어 추가합니다.
+        let requestBody = saveRoute(routeInfo: info)
+        guard let requestBodyData = try? JSONEncoder().encode(requestBody) else {
+            completion(false)
+            return
+        }
+        request.httpBody = requestBodyData
+
+        // URLSession으로 데이터를 보내고 응답을 받습니다.
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            // 서버 응답에서 HTTP 상태 코드를 확인합니다.
+            guard let httpResponse = response as? HTTPURLResponse, 200..<300 ~= httpResponse.statusCode else {
+                print("Error: \(error?.localizedDescription)")
+                completion(false)
+                return
+            }
+            completion(true)
+        }
+        task.resume()
+    }
 }
 
 

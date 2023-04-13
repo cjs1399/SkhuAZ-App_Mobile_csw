@@ -59,10 +59,10 @@ struct SettingView: View {
                             print("에러발생")
                         }
                     }
-                    
+                    self.presentationMode.wrappedValue.dismiss()
                 }) {
                     HStack{
-                        Image(systemName: "power")
+                        Image(systemName: "arrowshape.turn.up.left.circle")
                             .resizable()
                             .frame(width: 30,height: 30,alignment: .leading)
                         Text("로그아웃")
@@ -89,7 +89,7 @@ struct SettingView: View {
                 .cornerRadius(5)
                 .font(.system(size: 15, weight: .semibold))
                 
-                .foregroundColor(.mainButtonColor)
+                .foregroundColor(.pointColorR)
                 Button {
                     self.presentationMode.wrappedValue.dismiss()
                 } label: {

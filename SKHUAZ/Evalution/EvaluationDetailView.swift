@@ -348,6 +348,7 @@ struct EvaluationDetail: View {
                                     practice = "1 upto 5" // 연습
                                     presentation = "1 upto 5" // 발표
                                     review = "  총평 : " // 강의총평
+                                    presentationMode.wrappedValue.dismiss()
                                     
                                 } else {
                                     showAlert = true

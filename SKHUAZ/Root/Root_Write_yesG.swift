@@ -1,8 +1,8 @@
 //
-//  Evalution_Write_yesG.swift
-//  SkhuAZ
+//  Root_Write_yesG.swift
+//  SKHUAZ
 //
-//  Created by 박신영 on 2023/03/11.
+//  Created by 문인호 on 2023/04/13.
 //
 
 import SwiftUI

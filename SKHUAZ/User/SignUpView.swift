@@ -712,6 +712,7 @@ struct SignUpView: View {
                         Semester = ""
                     
                         signup_onoff = true
+                        presentationMode.wrappedValue.dismiss()
                     } else {
                         print("조건을 모두 입력하여주세요.")
                     }

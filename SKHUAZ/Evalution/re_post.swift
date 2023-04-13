@@ -1,103 +1,54 @@
-//
-//  Deep_GO.swift
-//  SKHUAZ
-//
-//  Created by 박신영 on 2023/04/12.
-//
-
 import SwiftUI
 
-
-struct secondLecture: Codable, Equatable {
-    let id: Int
-    let lectureName: String
-    let prfsName: String
-    let classYear: Int
-    let semester: Int
-    let department: String
-    let teamPlay: Int
-    let task: Int
-    let practice: Int
-    let presentation: Int
-    let review: String
-    let userNickname: String
-}
-
-
-struct deep_go: View {
-    @Binding var selectedLectureID: Int
-    //    @State private var equal = false
-    @State private var lectureName: String = "" // 과목명
-    @State private var prfsName: String = ""    // 교수님 성함
-    @State private var classYear: String = "수강년도"   // 수강년도
-    @State private var semester: String = ""   // 1 or 2 학기
-    @State private var department: String = "학과를 선택해주세요"  // 전공구분
-    @State private var is_major_required: Bool = false  // 전공필수 여부
-    @State private var teamPlay: String = "1 upto 5" // 팀플비중
-    @State private var task: String = "1 upto 5" // 과제량
-    @State private var practice: String = "1 upto 5" // 연습
-    @State private var presentation: String = "1 upto 5" // 발표
-    @State private var review: String = "  총평 : " // 강의총평
-
+struct re_post: View{
+    @State private var secoundlectures: [secondLecture] = []
+    @State private var showAlert: Bool = false
+    @State private var alertMessage: String = ""
+    
+    @State var post_id: Int
+    @EnvironmentObject var userData: UserData
+    @Environment(\.presentationMode) var presentationModePost
+    @Environment(\.presentationMode) var presentationMode
+    
     @State private var scorenotice = "※ 숫자가 높을 수록 횟수/양 이 많습니다."
     @State private var name_notice = "※ 과목명과 교수님 성함은 강의계획서를 준합니다."
-    @State private var skip: Bool = false
-    @State private var modify: Bool = false
-    @State var showAlert: Bool = false
-
-
-    @StateObject var api = PostAPI()
-    @EnvironmentObject var userData: UserData
-    //    @State var showAlert: Bool = false
-    @State var secoundlectures: [secondLecture] = []
-    @Environment(\.presentationMode) var presentationMode
-
-
+    
     var body: some View {
 
         VStack(alignment: .leading) {
-            ForEach(secoundlectures, id: \.id) { index, lecture in
+            ForEach(secoundlectures, id: \.id) { lecture in
                 Group{
 
                     GeometryReader { geometry in
                         let maxWidth = geometry.size.width
                         let maxHeight = geometry.size.height
 
-                        NavigationView{
                             ScrollView {
                                 VStack {
+                                    Text("")
+                                        .frame(height:10)
+
+                                    HStack{
+                                        Text("")
+                                            .frame(width:10)
+                                        Text("\(lecture.userNickname)")
+                                            .foregroundColor(Color(hex: 0x9AC1D1)) //글씨색
+                                            .fontWeight(.semibold)
+                                            .font(.system(size: 18))
+                                        Text(" 님이 작성한 글입니다.")
+                                            .font(.system(size: 13))
+                                    }
+
 
                                     HStack {
                                         if userData.nickname.description == lecture.userNickname {
-                                            Text("")
-                                                .frame(width:10)
-                                            Text("\(lecture.userNickname)")
-                                                .foregroundColor(Color(hex: 0x9AC1D1)) //글씨색
-                                                .fontWeight(.semibold)
-                                                .font(.system(size: 18))
-                                            Text(" 님이 작성한 글입니다.")
-                                                .font(.system(size: 13))
+                                            
 
                                             Spacer()
 
-                                            /**수정버튼**/
-                                            Button(action: {
-                                                self.modify = true
-                                                //~~~(id: lecture.id)
-                                            }) {
-                                                Image(systemName: "square.and.pencil")
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .padding(.bottom, 5)
-                                                    .foregroundColor(Color(hex: 0x9AC1D1))
-                                                    .padding(.trailing, 15)
-                                                    .frame(width: 50, height: 35)
-                                            }
-                                            .background(
-                                                NavigationLink(destination: E_modify(secoundLec: secoundlectures[Int(index)], selectedLectureID: $selectedLectureID)) {
-                                                                EmptyView()
-                                                            }
-                                            )
+
+
+
 
                                             /**삭제버튼**/
                                             Button(action: {
@@ -282,25 +233,31 @@ struct deep_go: View {
                                     }.padding(.bottom,20)
 
                                     HStack {
-                                        Text(String(describing: lecture.review)+"")
-                                            .padding(.bottom, 30)
-                                            .foregroundColor(Color(hex: 0x4F4F4F))
-                                            .font(.system(size: 15))
-                                            .lineSpacing(5) //줄 간격
-                                            .frame(width: maxWidth*0.9)
-                                            .border(Color(hex: 0x9AC1D1), width: 1)
-                                            .cornerRadius(0)
-                                            .multilineTextAlignment(.leading)
+                                        VStack {
+                                            Text(String(describing: lecture.review)+"")
+                                            
+                                                .foregroundColor(Color(hex: 0x4F4F4F))
+                                                .font(.system(size: 15))
+                                                .lineSpacing(5) //줄 간격
+                                                
+                                                
+                                                .multilineTextAlignment(.leading)
+                                        }
+                                        .frame(width: maxWidth*0.8)
+//                                        .border(Color(hex: 0x9AC1D1), width: 1)
+//                                        .cornerRadius(10)
                                     }
+                                    .padding(.bottom, 30)
                                 }
                                 //전체 큰 네모박스
-                                .padding(.top, 10)
+                                .padding()
+                                .padding(.top,10)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
                                         .stroke(Color(hex: 0x9AC1D1), lineWidth: 1)
-                                        .frame(width: maxWidth*0.95)
+                                        .frame(width: maxWidth*0.95, height:maxHeight*0.9)
                                 )
-                                .padding(.bottom,10)
+                                .padding(.bottom,5)
 
                                 HStack {
                                     //취소 버튼
@@ -320,12 +277,10 @@ struct deep_go: View {
                                     }
 
                                 }
-                                .padding(.bottom, 20)
                             }
 
 
 
-                        }//네비게이션뷰
                     }
                 }
 
@@ -333,47 +288,41 @@ struct deep_go: View {
             }
         }
         .onAppear {
-            getLecture(id: selectedLectureID)
+            getLecture(id: post_id)
         }
     }
-    func Classyear_recover (num:Int) -> Int {
-        var n = num.description.split(separator: ",")
-        var s = ""
-        for i in n {
-            s+=i.description
-        }
-        return Int(s)!
-
-    }
-
+    
     func getLecture(id: Int) {
         guard let url = URL(string: "http://skhuaz.duckdns.org/evaluations/\(id)") else {
             print("Invalid URL")
             return
         }
-
+        
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
                 return
             }
-
+            
             guard let data = data else {
                 print("No data received")
                 return
             }
-
+            
             do {
                 let decoder = JSONDecoder()
                 let lecture = try decoder.decode(secondLecture.self, from: data)
                 print("Received Lecture Data: \(lecture)")
                 self.secoundlectures.append(lecture) // 받아온 데이터를 배열에 추가
+                print(lecture)
             } catch let error {
                 print("Decoding error: \(error.localizedDescription)")
             }
+            
         }.resume()
     }
-
+    
+    
     func deleteLecture(id: Int) {
         guard let url = URL(string: "http://skhuaz.duckdns.org/evaluation/\(id)") else {
             print("Invalid URL")
@@ -383,7 +332,7 @@ struct deep_go: View {
         request.httpMethod = "DELETE"
         let sessionId = userData.sessionId
         request.addValue(sessionId, forHTTPHeaderField: "sessionId")
-
+        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
@@ -397,15 +346,33 @@ struct deep_go: View {
                             self.secoundlectures.remove(at: index)
                         }
                         print("삭제했습니다.")
+                        presentationModePost.wrappedValue.dismiss()
+                        
                     }
                 } else {
                     print("서버와의 통신이 실패했습니다. \(response.statusCode) 에러")
+                    showAlert = true
                 }
             }
         }
         task.resume()
     }
+    
+    
+    
 }
 
-
-
+struct secondLecture: Codable {
+    let id: Int
+    let lectureName: String
+    let prfsName: String
+    let classYear: Int
+    let semester: Int
+    let department: String
+    let teamPlay: Int
+    let task: Int
+    let practice: Int
+    let presentation: Int
+    let review: String
+    let userNickname: String
+}

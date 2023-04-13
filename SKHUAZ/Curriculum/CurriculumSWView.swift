@@ -31,7 +31,7 @@ struct CurriculumSWView: View {
                     }
                     .buttonStyle(redSubjecButton())
                     NavigationLink {
-                        CurriculumJavaView()
+                        CurriculumWebDevView()
                     } label: {
                         Text("웹 개발 입문")
                     }
@@ -41,13 +41,13 @@ struct CurriculumSWView: View {
                 HStack(spacing: 20){
                     Spacer()
                     NavigationLink {
-                        CurriculumJavaView()
+                        CurriculumPythonView()
                     } label: {
                         Text("Python 프로그래밍")
                     }
                     .buttonStyle(redSubjecButton())
                     NavigationLink {
-                        CurriculumJavaView()
+                        CurriculumDBView()
                     } label: {
                         Text("데이터베이스")
                     }
@@ -57,13 +57,13 @@ struct CurriculumSWView: View {
                 HStack(spacing: 20){
                     Spacer()
                     NavigationLink {
-                        CurriculumJavaView()
+                        CurriculumDCView()
                     } label: {
                         Text("데이터 통신")
                     }
                     .buttonStyle(redSubjecButton())
                     NavigationLink {
-                        CurriculumJavaView()
+                        CurriculumOSView()
                     } label: {
                         Text("운영체제")
                     }
@@ -71,7 +71,7 @@ struct CurriculumSWView: View {
                     Spacer()
                 }
                 NavigationLink {
-                    CurriculumJavaView()
+                    CurriculumIOTView()
                 } label: {
                     Text("사물 인터넷")
                 }

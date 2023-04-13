@@ -16,23 +16,66 @@ struct Lecture: Codable {
     let user: String?
 }
 
-//struct secondLecture: Codable {
-//    let id: Int
-//    let lectureName: String
-//    let prfsName: String
-//    let classYear: Int
-//    let semester: Int
-//    let department: String
-//    let teamPlay: Int
-//    let task: Int
-//    let practice: Int
-//    let presentation: Int
-//    let review: String?
-//    let userNickname: String
-//}
+
+struct SaveLecture: Codable {
+    let id: Int
+    let lectureName: String
+    let prfsName: String
+    let classYear: Int
+    let semester: Int
+    let department: String
+    let teamPlay: Int
+    let task: Int
+    let practice: Int
+    let presentation: Int
+    let review: String?
+    let userNickname: String
+}
+
 
 
 struct EvaluationView: View {
+    
+    //MARK: -
+    @State private var resaveLecture: SaveLecture? = nil
+    
+    func getLecture(id: Int) {
+        guard let url = URL(string: "http://skhuaz.duckdns.org/evaluations/\(id)") else {
+            print("Invalid URL")
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+                return
+            }
+
+            guard let data = data else {
+                print("No data received")
+                return
+            }
+
+            do {
+                let decoder = JSONDecoder()
+                let lecture = try decoder.decode(SaveLecture.self, from: data)
+                print("Received Lecture Data: \(lecture)")
+                DispatchQueue.main.async {
+                    self.resaveLecture = lecture // Store received data in resaveLecture
+                    print("resaveLecture: \(self.resaveLecture)") // Print resaveLecture after receiving data
+                    // 여기에서 resaveLecture 값을 확인할 수 있음
+                }
+            } catch let error {
+                print("Decoding error: \(error.localizedDescription)")
+            }
+
+        }.resume()
+    }
+
+    
+
+    //MARK: -
+    
     @StateObject var api = PostAPI()
     @EnvironmentObject var userData: UserData
     @State var lectures: [Lecture] = []
@@ -56,7 +99,9 @@ struct EvaluationView: View {
     
     @State var selectedLectureID: Int
     @State private var isMoveViewPresented: Bool = false
-
+    @State private var MoveReSave: Bool = false
+    @State private var ReSaveShowAlert:Bool = false
+    
     
     
     var body: some View {
@@ -152,17 +197,47 @@ struct EvaluationView: View {
                                         lectureNameView(for: lecture)
                                             .frame(width: 320, height: 40)
                                             .background(Color(uiColor: .secondarySystemBackground))
-
+                                        
                                         chartView(for: lecture)
                                             .frame(width: 320, height: 90)
                                             .background(Color.white)
                                             .alignmentGuide(.leading, computeValue: { d in d[HorizontalAlignment.leading] })
-
+                                        
                                         HStack {
                                             Text("작성자 : \(lecture.nickname)")
                                                 .padding(.leading, 12)
                                                 .font(.system(size: 12))
                                             Spacer()
+                                            
+                                            HStack {
+                                                Button {
+                                                    selectedLectureID = lecture.id
+                                                    if lecture.nickname == userData.nickname {
+                                                        MoveReSave = true
+                                                        getLecture(id: lecture.id)
+                                                        print(resaveLecture)
+                                                        print("이 위에 나와야해")
+                                                    } else {
+                                                        MoveReSave = false
+                                                        ReSaveShowAlert = true // alert를 띄우기 위한 변수 추가
+                                                    }
+                                                } label: {
+                                                    Text("수정하기")
+                                                        .font(.system(size: 15))
+                                                        .foregroundColor(.red)
+                                                }
+                                                .alert(isPresented: $ReSaveShowAlert, content: {
+                                                    Alert(title: Text("수정 실패!"), message: Text("해당 글의 수정 접근 권한이 없습니다."), dismissButton: .default(Text("확인")))
+                                                })
+                                                .onTapGesture {
+                                                    selectedLectureID = lecture.id
+                                                    isMoveViewPresented = true // present될 view가 있음을 알리는 변수 값 변경
+                                                }
+                                                .sheet(isPresented: $MoveReSave, content: {
+                                                    re_save(resaveLectures: resaveLecture ?? nil, save_id: selectedLectureID)
+                                                })
+                                            }
+                                            
                                             Button {
                                                 selectedLectureID = lecture.id
                                                 isMoveViewPresented = true // present될 view가 있음을 알리는 변수 값 변경
@@ -174,9 +249,10 @@ struct EvaluationView: View {
                                                 selectedLectureID = lecture.id
                                                 isMoveViewPresented = true // present될 view가 있음을 알리는 변수 값 변경
                                             }
-
+                                            
                                             .sheet(isPresented: $isMoveViewPresented, content: {
-                                                deep_go(selectedLectureID: $selectedLectureID)
+                                                re_post(post_id: selectedLectureID)
+                                                //                                                deep_go(selectedLectureID: $selectedLectureID)
                                             })
                                         }
                                     }
@@ -191,7 +267,7 @@ struct EvaluationView: View {
                         .padding()
                     }
                     
-                   
+                    
                     .padding(.bottom, 15)
                 }
                 .onAppear(perform: {
@@ -246,10 +322,10 @@ struct EvaluationView: View {
         }
     }
     
-//    func buttonsView(for lecture: Lecture) -> some View {
-//
-//        .font(.system(size: 12))
-//    }
+    //    func buttonsView(for lecture: Lecture) -> some View {
+    //
+    //        .font(.system(size: 12))
+    //    }
     
     
     
