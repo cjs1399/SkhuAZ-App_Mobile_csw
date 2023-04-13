@@ -12,7 +12,7 @@ struct Lecture: Codable {
     let practice: Int
     let presentation: Int
     let nickname: String
-    let review: String?
+    let review: String
     let user: String?
 }
 
@@ -33,6 +33,7 @@ struct Lecture: Codable {
 
 
 struct EvaluationView: View {
+    @State var modify: Bool = false
     @StateObject var api = PostAPI()
     @EnvironmentObject var userData: UserData
     @State var lectures: [Lecture] = []
@@ -69,7 +70,7 @@ struct EvaluationView: View {
                 VStack {
                     /**검색창**/
                     HStack{
-                        TextField("과목명/교수명/유저이름을 검색해주세요", text: $searchText)
+                        TextField("과목명/교수명/유저이름으 검색해주세요", text: $searchText)
                             .padding(.leading)
                             .frame(width: 300, height: 50)
                             .background(Color(.white))
@@ -159,8 +160,9 @@ struct EvaluationView: View {
                                             .alignmentGuide(.leading, computeValue: { d in d[HorizontalAlignment.leading] })
 
                                         HStack {
-                                            Text("\(lecture.nickname), \(lecture.id)")
-                                                .padding(.leading, 15)
+                                            Text("작성자 : \(lecture.nickname)")
+                                                .padding(.leading, 12)
+                                                .font(.system(size: 12))
                                             Spacer()
                                             Button {
                                                 selectedLectureID = lecture.id
@@ -174,13 +176,37 @@ struct EvaluationView: View {
                                                 isMoveViewPresented = true // present될 view가 있음을 알리는 변수 값 변경
                                             }
 
-                                            // ...
-
                                             .sheet(isPresented: $isMoveViewPresented, content: {
                                                 deep_go(selectedLectureID: $selectedLectureID)
                                             })
-                                            Text("")
-                                                .frame(width:10)
+                                            
+                                            HStack {
+                                                if userData.nickname.description == lecture.nickname {
+
+                                                    /**수정버튼**/
+                                                    Button(action: {
+                                                        modify = true
+                                                        //~~~(id: lecture.id)
+                                                    }) {
+                                                        Image(systemName: "square.and.pencil")
+                                                            .resizable()
+                                                            .aspectRatio(contentMode: .fit)
+                                                            .padding(.bottom, 5)
+                                                            .foregroundColor(Color(hex: 0x9AC1D1))
+                                                            .padding(.trailing, 15)
+                                                            .frame(width: 50, height: 35)
+                                                    }
+                                                    .background(
+                                                        NavigationLink(destination: E_modify(secoundLec: secoundlectures[Int(index)], selectedLectureID: $selectedLectureID)) {
+                                                                        EmptyView()
+                                                                    }
+                                                    )
+                                                }
+                                                else {
+                                                    Text("")
+                                                }
+
+                                            }
                                         }
                                     }
                                     .padding()

@@ -36,7 +36,8 @@ struct LoginView: View {
                     .cornerRadius(10)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
-                    .padding(.top)
+                    .padding(.top, 5)
+                    .padding(.bottom, 10)
                 
                 Button(action: {
                     // 이메일, 비밀번호 로그인 api 파라미터로 보내주기
@@ -61,13 +62,13 @@ struct LoginView: View {
                     
                     
                 }) {
-                    Text("로그인 api 슈우우우웃~ / 유저데이터 : \(userData.email)")
-                        .frame(width: 330, height: 10)
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color(red: 0.603, green: 0.756, blue: 0.819))
-                        .cornerRadius(10)
+                    Text("로그인")
+                        .frame(width: 315, height: 10)
+                                                .font(.headline)
+                                                .foregroundColor(.white)
+                                                .padding()
+                                                .background(Color(red: 0.603, green: 0.756, blue: 0.819))
+                                                .cornerRadius(10)
                 }
                 if login_onoff == true {
                     NavigationLink(destination: TabbarView(), isActive: $login_onoff) {
@@ -84,7 +85,7 @@ struct LoginView: View {
                         destination: SignUpView(),
                         label:{
                             Text("회원가입")
-                                .font(.system(size: 10))
+                                .font(.system(size: 15))
                                 .foregroundColor(Color.gray)
                                 .padding(.trailing)
                         })

@@ -23,6 +23,8 @@ struct SignUpView: View {
     @State var CheckMessage: String = "ex) abc123@office.skhu.ac.kr"
     @State var emailSuccess: Bool = false
     
+    
+    
     @State var RepeatedPassword: String = ""
     @State var graduate: Bool = false // 졸업유무
     @State var major1: String = ""
@@ -30,12 +32,14 @@ struct SignUpView: View {
     @State var department: Bool = false // 전공미선택
     @State var major_minor: Bool = false // 주/부전공
     @State var double_major: Bool = false // 복수전공
-    
+    @State var real_emailSuccess: Bool = false
     @State private var date: String = ""
     @State private var passwordError: String = ""
     @State private var Semester: String = ""
     
     @State private var SemesterMessage: String = "재학중인 학기를 선택하시오"
+    
+    @State var signup_onoff: Bool = false
     
     
     let SelectedMajor1 = [
@@ -62,6 +66,8 @@ struct SignUpView: View {
         @Binding var ShowModel: Bool
         @State var showAlert: Bool = false
         @Binding var emailSuccess: Bool
+        @Binding var real_emailSuccess: Bool
+        
         
         var body: some View {
             Group{
@@ -141,6 +147,7 @@ struct SignUpView: View {
                         
                         if t[1] == "true}" {
                             emailSuccess = true
+                            real_emailSuccess = true
                         } else {
                             emailSuccess = false
                         }
@@ -286,7 +293,7 @@ struct SignUpView: View {
                             .frame(width: 90, height:50)
                             .background(RoundedRectangle(cornerRadius: 10).strokeBorder(Color(red: 0.76, green: 0.552, blue: 0.552)))
                             .sheet(isPresented: self.$ShowModel) {
-                                ModalView(ShowModel: $ShowModel, emailSuccess: $emailSuccess)
+                                ModalView(ShowModel: $ShowModel, emailSuccess: $emailSuccess, real_emailSuccess: $real_emailSuccess)
                             }
                         
                     }
@@ -299,6 +306,19 @@ struct SignUpView: View {
                         .padding(.leading, 30)
 
                     Spacer()
+                }
+                HStack{
+                    if real_emailSuccess == true {
+                        Text("이메일 인증 완료")
+                            .font(.system(size: 14))
+                            .foregroundColor(Color(red: 0.603, green: 0.756, blue: 0.819))
+                            .lineLimit(2)
+                            .padding(.leading, 30)
+                        Spacer()
+                    }
+                    else{
+                        Text(" ")
+                    }
                 }
             }
             .padding(.bottom, 16)// 이메일 중복확인 HStack
@@ -690,9 +710,15 @@ struct SignUpView: View {
                         major_minor = false
                         double_major = false
                         Semester = ""
-                        
+                    
+                        signup_onoff = true
                     } else {
                         print("조건을 모두 입력하여주세요.")
+                    }
+                    
+                    NavigationLink(destination: LoginView(), isActive: $signup_onoff) {
+                        
+                        EmptyView()
                     }
                 }) {
                     Text("회원가입")

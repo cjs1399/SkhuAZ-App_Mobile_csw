@@ -10,6 +10,7 @@ import SwiftUI
 struct EvaluationDetail: View {
     
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
     
     @State private var lectureName: String = "" // 과목명
     @State private var prfsName: String = ""    // 교수님 성함
@@ -352,7 +353,10 @@ struct EvaluationDetail: View {
                                     showAlert = true
                                     print("조건을 모두 입력하여주세요.")
                                 }
-                            })
+                                dismiss()
+                            }
+                            
+                            )
                             {
                                 Text("저장")
                                     .foregroundColor(Color.white)

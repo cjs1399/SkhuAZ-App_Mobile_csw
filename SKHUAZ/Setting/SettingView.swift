@@ -62,7 +62,7 @@ struct SettingView: View {
                     
                 }) {
                     HStack{
-                        Image(systemName: "arrowshape.turn.up.left.circle")
+                        Image(systemName: "power")
                             .resizable()
                             .frame(width: 30,height: 30,alignment: .leading)
                         Text("로그아웃")

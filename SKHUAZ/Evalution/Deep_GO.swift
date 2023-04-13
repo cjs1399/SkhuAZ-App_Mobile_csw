@@ -19,7 +19,7 @@ struct secondLecture: Codable, Equatable {
     let task: Int
     let practice: Int
     let presentation: Int
-    let review: String?
+    let review: String
     let userNickname: String
 }
 
@@ -56,7 +56,7 @@ struct deep_go: View {
     var body: some View {
 
         VStack(alignment: .leading) {
-            ForEach(secoundlectures, id: \.id) { lecture in
+            ForEach(secoundlectures, id: \.id) { index, lecture in
                 Group{
 
                     GeometryReader { geometry in
@@ -66,9 +66,6 @@ struct deep_go: View {
                         NavigationView{
                             ScrollView {
                                 VStack {
-
-
-
 
                                     HStack {
                                         if userData.nickname.description == lecture.userNickname {
@@ -97,14 +94,10 @@ struct deep_go: View {
                                                     .frame(width: 50, height: 35)
                                             }
                                             .background(
-                                                NavigationLink(destination: E_modify(selectedLectureID: $selectedLectureID), isActive: $modify) {
-
-                                                    EmptyView()
-                                                }
+                                                NavigationLink(destination: E_modify(secoundLec: secoundlectures[Int(index)], selectedLectureID: $selectedLectureID)) {
+                                                                EmptyView()
+                                                            }
                                             )
-
-
-
 
                                             /**삭제버튼**/
                                             Button(action: {
@@ -301,14 +294,13 @@ struct deep_go: View {
                                     }
                                 }
                                 //전체 큰 네모박스
-                                .padding()
-                                .padding(.top,10)
+                                .padding(.top, 10)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
                                         .stroke(Color(hex: 0x9AC1D1), lineWidth: 1)
-                                        .frame(width: maxWidth*0.95, height:maxHeight*0.9)
+                                        .frame(width: maxWidth*0.95)
                                 )
-                                .padding(.bottom,20)
+                                .padding(.bottom,10)
 
                                 HStack {
                                     //취소 버튼
