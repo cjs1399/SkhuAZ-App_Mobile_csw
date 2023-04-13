@@ -33,7 +33,6 @@ struct Lecture: Codable {
 
 
 struct EvaluationView: View {
-    @State var modify: Bool = false
     @StateObject var api = PostAPI()
     @EnvironmentObject var userData: UserData
     @State var lectures: [Lecture] = []
@@ -179,34 +178,6 @@ struct EvaluationView: View {
                                             .sheet(isPresented: $isMoveViewPresented, content: {
                                                 deep_go(selectedLectureID: $selectedLectureID)
                                             })
-                                            
-                                            HStack {
-                                                if userData.nickname.description == lecture.nickname {
-
-                                                    /**수정버튼**/
-                                                    Button(action: {
-                                                        modify = true
-                                                        //~~~(id: lecture.id)
-                                                    }) {
-                                                        Image(systemName: "square.and.pencil")
-                                                            .resizable()
-                                                            .aspectRatio(contentMode: .fit)
-                                                            .padding(.bottom, 5)
-                                                            .foregroundColor(Color(hex: 0x9AC1D1))
-                                                            .padding(.trailing, 15)
-                                                            .frame(width: 50, height: 35)
-                                                    }
-                                                    .background(
-                                                        NavigationLink(destination: E_modify(secoundLec: secoundlectures[Int(index)], selectedLectureID: $selectedLectureID)) {
-                                                                        EmptyView()
-                                                                    }
-                                                    )
-                                                }
-                                                else {
-                                                    Text("")
-                                                }
-
-                                            }
                                         }
                                     }
                                     .padding()
