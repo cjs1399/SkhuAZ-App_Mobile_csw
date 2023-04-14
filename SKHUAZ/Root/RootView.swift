@@ -111,7 +111,9 @@ struct RootView: View {
 
             NavigationView {
                 ScrollView {
-                    VStack(spacing: 20) {
+                    VStack(spacing: 5) {
+                        Text("")
+                            .frame(height:6)
                         ForEach(viewModel.posts.filter {
                             searchinput.isEmpty ? true : ($0.title?.contains(searchinput) ?? false)
                         }, id: \.id) { post in
@@ -120,16 +122,17 @@ struct RootView: View {
                                 isShowingDetail = true
                             }, label: {
                                 RoundedRectangle(cornerRadius: 10)
-                                    .stroke(Color.black, lineWidth: 2)
+                                    .stroke(Color(hex: 0x9AC1D1), lineWidth: 1)
                                     .frame(width: 370, height: 60)
                                     .padding(5)
                                     .overlay(
                                         HStack(alignment: .center){
                                             if let title = post.title {
                                                 Text(title)
-                                                    .foregroundColor(Color(hex: 0x4F4F4F))
+                                                    .foregroundColor(Color.black)
                                                     .font(.system(size: 15).bold())
                                                     .frame(maxWidth: .infinity)
+                                                
                                             } else {
                                                 Text("제목이 없습니다.")
                                                     .font(.title)
@@ -154,6 +157,8 @@ struct RootView: View {
                                     )
                             })
                         }
+                        Text("")
+                            .frame(height:6)
                     }
                     .padding(.horizontal)
                 }
@@ -262,7 +267,7 @@ struct RootView: View {
         }
 
 
-
+        /**MyStructDetail**/
         var body: some View {
             NavigationView{
                 VStack {
@@ -270,7 +275,7 @@ struct RootView: View {
                         .font(.system(size: 17))
                         .padding(.top, 20)
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color.black, lineWidth: 2)
+                        .stroke(Color(hex: 0x9AC1D1), lineWidth: 2)
                         .frame(width: 370, height: 400)
                         .padding(5)
                         .overlay(content: {
@@ -310,11 +315,11 @@ struct RootView: View {
                                         }
                                     })
                                 
+                                
                                 Text(myStruct.recommendation)
-                                //                                .alignmentGuide(.leading) { d in d[.leading] }
                                     .font(.system(size: 15))
                                     .padding(.bottom, 90)
-                                    .frame(width: 350, height: 160)
+                                    .frame(width: 350, height: 200)
                                     .background(Color(hex: 0xEFEFEF))
                                     .cornerRadius(10)
                             })

@@ -97,7 +97,7 @@ struct EvaluationView: View {
     @State private var detail = false
     @State var secoundlectures: [secondLecture] = []
     @State var selectedLectureID: Int
-    @State private var isMoveViewPresented: Bool = false
+    @State var isMoveViewPresented: Bool = false
     @State private var MoveReSave: Bool = false
     @State private var ReSaveShowAlert:Bool = false
     
@@ -227,13 +227,17 @@ struct EvaluationView: View {
     //                                                        ReSaveShowAlert = true // alert를 띄우기 위한 변수 추가
     //                                                    }
                                                     } label: {
-                                                        Image(systemName: "square.and.pencil")
-                                                            .resizable()
-                                                            .aspectRatio(contentMode: .fit)
-                                                            .padding(.bottom, 5)
-                                                            .foregroundColor(Color(hex: 0xC28D8D))
-                                                            .padding(.trailing, 15)
-                                                            .frame(width: 50, height: 35)
+                                                        VStack {
+                                                            Text("")
+                                                                .frame(height:2)
+                                                            Image(systemName: "square.and.pencil")
+                                                                .resizable()
+                                                                .aspectRatio(contentMode: .fit)
+                                                                .padding(.bottom, 5)
+                                                                .foregroundColor(Color(hex: 0xC28D8D))
+                                                                .padding(.trailing, 15)
+                                                                .frame(width: 40, height: 40)
+                                                        }
                                                     }
                                                     .onTapGesture {
                                                         selectedLectureID = lecture.id
@@ -268,7 +272,7 @@ struct EvaluationView: View {
                                             }
                                             
                                             .sheet(isPresented: $isMoveViewPresented, content: {
-                                                re_post(post_id: selectedLectureID)
+                                                re_post(isMoveViewPresented: $isMoveViewPresented, post_id: selectedLectureID)
                                                 //                                                deep_go(selectedLectureID: $selectedLectureID)
                                             })
                                         }

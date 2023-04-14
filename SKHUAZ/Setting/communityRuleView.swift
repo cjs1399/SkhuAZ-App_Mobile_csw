@@ -45,7 +45,7 @@ struct communityRuleView: View {
                     Text("이용규칙")
                         .font(.system(size: 30))
                 }
-                .padding(.bottom,20)
+                .padding(.bottom,10)
                 VStack(alignment: .leading) {
                     Group {
                         title(text: "1. 명확하고 이해하기 쉬운 언어 사용")
@@ -67,6 +67,8 @@ struct communityRuleView: View {
                         coment(text: "* SKHUAZ는 이용규칙을 어기는 사용자에 대해 경고를 하고, 반복적인 경우 계정을 정지할 수 있습니다.\n* 악의적인 행위나 법적 문제를 초래하는 행위가 발견된 경우, 관련 당국에 신고할 수 있습니다.")
                     }
                 }
+                Text("")
+                    .frame(height:20)
             }
         }
         

@@ -250,6 +250,7 @@ class UserData: ObservableObject {
     @Published var semester: String = ""
     @Published var department: Bool = false
     @Published var email: String = ""
+    @Published var login: Bool = false
     
     func setData(from response: UserData) {
         double_major = response.double_major

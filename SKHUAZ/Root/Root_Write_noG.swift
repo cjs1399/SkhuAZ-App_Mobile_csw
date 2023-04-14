@@ -26,12 +26,16 @@ struct Root_Write_noG: View {
     var body: some View {
         VStack {
             VStack {
-                Text("촉촉한 초코칩 님은 지금 2023-1 학기 입니다.")
-                    .font(.system(size: 18))
-                    .padding(.top, 20)
-                
+                HStack {
+                    Text("\(userData.nickname)")
+                        .font(.system(size: 18))
+                        .foregroundColor(Color(hex: 0x9AC1D1))
+                        
+                    Text("님은 지금 2023-1 학기 입니다.")
+                        .font(.system(size: 18))
+                }.padding(.top, 20)
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.black, lineWidth: 2)
+                    .stroke(Color(hex: 0x9AC1D1), lineWidth: 2)
                     .frame(width: 370, height: 450)
                     .padding(5)
                     .overlay(content: {

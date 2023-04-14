@@ -77,7 +77,7 @@ struct Root_Mo : View{
                     .font(.system(size: 17))
                     .padding(.top, 20)
                 RoundedRectangle(cornerRadius: 10)
-                    .stroke(Color.black, lineWidth: 2)
+                    .stroke(Color(hex: 0x9AC1D1), lineWidth: 2)
                     .frame(width: 370, height: 400)
                     .padding(5)
                     .overlay(content: {

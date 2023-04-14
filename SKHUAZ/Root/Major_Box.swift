@@ -55,8 +55,8 @@ struct Major_Box: View {    var body: some View {
             }
         })
         .frame(width: 300, height: 50)
-        .border(Color(hex: 0x9AC1D1), width: 1)
-        .cornerRadius(10)
+//        .border(Color(hex: 0x9AC1D1), width: 1)
+//        .cornerRadius(10)
 
     }
 }

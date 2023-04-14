@@ -165,17 +165,15 @@ struct re_save: View{
                                     }
                                 } label: {
                                     HStack {
-                                        Text("\(department)과")
-//                                            .fixedSize(horizontal: true, vertical: false)
-//                                            .lineLimit(nil)
-//                                                      .multilineTextAlignment(.center)
+                                        TextEditor(text:$department)
+                                            .frame(height: 40)
+                                            .foregroundColor(Color(hex: 0x9AC1D1)) //글씨색
+                                            .font(.system(size: 15))
+                                            .fontWeight(.semibold)
+                                            .cornerRadius(10)
                                     }
                                 }
-                                .frame(height: 40)
-                                .foregroundColor(Color(hex: 0x9AC1D1)) //글씨색
-                                .font(.system(size: 15))
-                                .fontWeight(.semibold)
-                                .cornerRadius(10)
+                                
 //                                .lineLimit(nil)
 //                                          .multilineTextAlignment(.center)
                             }

@@ -118,7 +118,7 @@ struct CurriculumJavaView: View {
                                 })
                                 .buttonStyle(redSubjecButton())
                             }
-                        }
+                    }.padding(.bottom,15)
                     
                     }
                 if isNP {

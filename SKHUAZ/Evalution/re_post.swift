@@ -4,11 +4,10 @@ struct re_post: View{
     @State private var secoundlectures: [secondLecture] = []
     @State private var showAlert: Bool = false
     @State private var alertMessage: String = ""
-    
+    @Binding var isMoveViewPresented: Bool
     @State var post_id: Int
     @EnvironmentObject var userData: UserData
     @Environment(\.presentationMode) var presentationModePost
-    @Environment(\.presentationMode) var presentationMode
     
     @State private var scorenotice = "※ 숫자가 높을 수록 횟수/양 이 많습니다."
     @State private var name_notice = "※ 과목명과 교수님 성함은 강의계획서를 준합니다."
@@ -66,7 +65,8 @@ struct re_post: View{
                                                     dismissButton: .default(Text("확인")) {
                                                         // Alert를 닫고 다시 표시
                                                         self.showAlert = false
-                                                        self.presentationMode.wrappedValue.dismiss()                    }
+                                                        self.isMoveViewPresented = false
+                                                                          }
                                                 )
                                             }
                                         }
@@ -234,7 +234,7 @@ struct re_post: View{
                                                 .font(.system(size: 15))
                                                 .lineSpacing(5) //줄 간격
                                                 .multilineTextAlignment(.leading)
-                                        .frame(width: maxWidth*0.8, height: maxHeight*0.2)
+                                        .frame(width: maxWidth*0.8, height: maxHeight*0.25)
                                         .border(Color(hex: 0x9AC1D1), width: 1)
                                         .cornerRadius(10)
                                     }.padding(.bottom, 30)
@@ -253,7 +253,7 @@ struct re_post: View{
                                     Button(action: {
                                         print("목록버튼 클릭")
 //                                        skip = true
-                                        presentationMode.wrappedValue.dismiss()
+                                        presentationModePost.wrappedValue.dismiss()
                                     })
                                     {
                                         Text("목록으로")
@@ -336,7 +336,7 @@ struct re_post: View{
                             self.secoundlectures.remove(at: index)
                         }
                         print("삭제했습니다.")
-                        presentationModePost.wrappedValue.dismiss()
+                        self.presentationModePost.wrappedValue.dismiss()
                         
                     }
                 } else {
