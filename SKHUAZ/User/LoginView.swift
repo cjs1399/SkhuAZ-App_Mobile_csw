@@ -9,6 +9,9 @@ struct LoginView: View {
     @EnvironmentObject var userData: UserData
     @State private var error = false
     @State var login_onoff: Bool = false
+    @State var loginError: Bool = false
+    var alertMessage = "이메일, 비밀번호를 확인하여주십시오."
+    @Environment(\.presentationMode) var presentationMode
     
     func logintoggle() {
         login_onoff = RestAPI.LogineSuccess
@@ -48,15 +51,15 @@ struct LoginView: View {
                         api.LoginSuccess(parameters: parameters, userData: userData) { value in
                             if value {
                             } else {
-                                error = true
+                                loginError = true
                             }
                         }
                         RestAPI.LogineSuccess = true
                         login_onoff = RestAPI.LogineSuccess
                     }
-
+                    
                     else {
-                        error = true
+                        loginError = true
                     }
                     
                     
@@ -64,21 +67,28 @@ struct LoginView: View {
                 }) {
                     Text("로그인")
                         .frame(width: 315, height: 10)
-                                                .font(.headline)
-                                                .foregroundColor(.white)
-                                                .padding()
-                                                .background(Color(red: 0.603, green: 0.756, blue: 0.819))
-                                                .cornerRadius(10)
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(Color(red: 0.603, green: 0.756, blue: 0.819))
+                        .cornerRadius(10)
                 }
-                if login_onoff == true {
+//                .alert(isPresented: $loginError) {
+//                    Alert(
+//                        title: Text("아이디 비밀번호를 확인해주세요."),
+//                        message: nil,
+//                        dismissButton: .default(Text("확인")) {
+//                            // Alert를 닫고 다시 표시
+//                            self.loginError = false
+//                            self.presentationMode.wrappedValue.dismiss()                    }
+//                    )
+//                }
+                if login_onoff == true && loginError == false {
                     NavigationLink(destination: TabbarView(), isActive: $login_onoff) {
                         
                         EmptyView()
                     }
                 }
-                
-                
-                
                 HStack{
                     Spacer()
                     NavigationLink(
@@ -90,17 +100,20 @@ struct LoginView: View {
                                 .padding(.trailing)
                         })
                 }
-                
+                // 로그인 실패 시 오류
+                if error {
+                    Text("아이디 또는 비밀번호 오류")
+                        .foregroundColor(Color.red)
+                }
+            }.alert(isPresented: $loginError) {
+                Alert(title: Text("로그인 오류"), message: Text(alertMessage), dismissButton: .default(Text("확인")))
             }
-            // 로그인 실패 시 오류
-            if error {
-                Text("아이디 또는 비밀번호 오류")
-                    .foregroundColor(Color.red)
-            }
-        }
-        .navigationBarBackButtonHidden(true)
+            
+            
+        }.navigationBarBackButtonHidden(true)
+            
+        
+        
+        
     }
-    
-    
-    
 }

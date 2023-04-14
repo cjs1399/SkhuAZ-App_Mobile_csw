@@ -471,8 +471,14 @@ struct editProfileView: View {
             }
         }
         .padding(.bottom, 30)
+        HStack {
+            Text("※ 정보를 수정하셨다면 로그인을 다시 해주십시오.")
+                .foregroundColor(Color.red)
+                .font(.system(size: 15))
+        }
         Button(action: {
             sendToServer()
+            presentationMode.wrappedValue.dismiss()
         }) {
             Text("저장")
                 .frame(width: 330, height: 10)

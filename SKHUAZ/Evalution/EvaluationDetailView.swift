@@ -99,9 +99,9 @@ struct EvaluationDetail: View {
                                                        action: { classYear = "2020"})
                                                 Button("2021년",
                                                        action: { classYear = "2021"})
-                                                Button("2021년",
+                                                Button("2022년",
                                                        action: { classYear = "2022"})
-                                                Button("2021년",
+                                                Button("2023년",
                                                        action: { classYear = "2023"})
                                             }
                                             .foregroundColor(Color(hex: 0x9AC1D1)) //글씨색

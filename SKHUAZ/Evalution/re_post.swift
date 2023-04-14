@@ -13,9 +13,11 @@ struct re_post: View{
     @State private var scorenotice = "※ 숫자가 높을 수록 횟수/양 이 많습니다."
     @State private var name_notice = "※ 과목명과 교수님 성함은 강의계획서를 준합니다."
     
+    
+    
     var body: some View {
 
-        VStack(alignment: .leading) {
+        VStack {
             ForEach(secoundlectures, id: \.id) { lecture in
                 Group{
 
@@ -23,33 +25,27 @@ struct re_post: View{
                         let maxWidth = geometry.size.width
                         let maxHeight = geometry.size.height
 
-                            ScrollView {
-                                VStack {
+                            ScrollView(showsIndicators: false) {
+                                VStack(alignment: .center) {
                                     Text("")
                                         .frame(height:10)
 
-                                    HStack{
-                                        Text("")
-                                            .frame(width:10)
-                                        Text("\(lecture.userNickname)")
-                                            .foregroundColor(Color(hex: 0x9AC1D1)) //글씨색
-                                            .fontWeight(.semibold)
-                                            .font(.system(size: 18))
-                                        Text(" 님이 작성한 글입니다.")
-                                            .font(.system(size: 13))
-                                    }
+                                    
 
 
                                     HStack {
+                                        HStack{
+                                            Text("")
+                                                .frame(width:10)
+                                            Text("\(lecture.userNickname)")
+                                                .foregroundColor(Color(hex: 0x9AC1D1)) //글씨색
+                                                .fontWeight(.semibold)
+                                                .font(.system(size: 18))
+                                            Text(" 님이 작성한 글입니다.")
+                                                .font(.system(size: 13))
+                                        }
                                         if userData.nickname.description == lecture.userNickname {
-                                            
-
                                             Spacer()
-
-
-
-
-
                                             /**삭제버튼**/
                                             Button(action: {
                                                 self.showAlert = true
@@ -79,7 +75,7 @@ struct re_post: View{
                                         }
 
                                     }
-                                    .padding(.top, 20)
+                                    .padding(.top, 5)
                                     .padding(.bottom, 10)
 
                                     HStack {
@@ -233,31 +229,24 @@ struct re_post: View{
                                     }.padding(.bottom,20)
 
                                     HStack {
-                                        VStack {
                                             Text(String(describing: lecture.review)+"")
-                                            
                                                 .foregroundColor(Color(hex: 0x4F4F4F))
                                                 .font(.system(size: 15))
                                                 .lineSpacing(5) //줄 간격
-                                                
-                                                
                                                 .multilineTextAlignment(.leading)
-                                        }
-                                        .frame(width: maxWidth*0.8)
-//                                        .border(Color(hex: 0x9AC1D1), width: 1)
-//                                        .cornerRadius(10)
-                                    }
-                                    .padding(.bottom, 30)
+                                        .frame(width: maxWidth*0.8, height: maxHeight*0.2)
+                                        .border(Color(hex: 0x9AC1D1), width: 1)
+                                        .cornerRadius(10)
+                                    }.padding(.bottom, 30)
                                 }
                                 //전체 큰 네모박스
-                                .padding()
-                                .padding(.top,10)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .stroke(Color(hex: 0x9AC1D1), lineWidth: 1)
-                                        .frame(width: maxWidth*0.95, height:maxHeight*0.9)
-                                )
-                                .padding(.bottom,5)
+//                                .padding()
+//                                .overlay(
+//                                    RoundedRectangle(cornerRadius: 10)
+//                                        .stroke(Color(hex: 0x9AC1D1), lineWidth: 1)
+//                                        .frame(width: maxWidth*0.95, height:maxHeight*0.9)
+//                                )
+//                                .padding(.bottom,5)
 
                                 HStack {
                                     //취소 버튼
@@ -277,7 +266,7 @@ struct re_post: View{
                                     }
 
                                 }
-                            }
+                            }.padding()
 
 
 
@@ -289,6 +278,7 @@ struct re_post: View{
         }
         .onAppear {
             getLecture(id: post_id)
+            
         }
     }
     

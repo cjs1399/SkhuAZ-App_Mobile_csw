@@ -28,7 +28,7 @@ struct SaveLecture: Codable {
     let task: Int
     let practice: Int
     let presentation: Int
-    let review: String?
+    let review: String
     let userNickname: String
 }
 
@@ -37,7 +37,8 @@ struct SaveLecture: Codable {
 struct EvaluationView: View {
     
     //MARK: -
-    @State private var resaveLecture: SaveLecture? = nil
+    @State private var resaveLecture: SaveLecture = SaveLecture(id: 0, lectureName: "", prfsName: "", classYear: 0, semester: 0, department: "", teamPlay: 0, task: 0, practice: 0, presentation: 0, review: "", userNickname: "")
+
     
     func getLecture(id: Int) {
         guard let url = URL(string: "http://skhuaz.duckdns.org/evaluations/\(id)") else {
@@ -77,7 +78,7 @@ struct EvaluationView: View {
     //MARK: -
     
     @StateObject var api = PostAPI()
-    @EnvironmentObject var userData: UserData
+    
     @State var lectures: [Lecture] = []
     @State private var searchText: String = ""
     @State var test: String = ""
@@ -92,15 +93,16 @@ struct EvaluationView: View {
         }
     }
     @State private var isDataFetched = false
-    @Environment(\.presentationMode) var presentationMode
+    
     @State private var detail = false
     @State var secoundlectures: [secondLecture] = []
-    
-    
     @State var selectedLectureID: Int
     @State private var isMoveViewPresented: Bool = false
     @State private var MoveReSave: Bool = false
     @State private var ReSaveShowAlert:Bool = false
+    
+    @EnvironmentObject var userData: UserData
+    @Environment(\.presentationMode) var presentationMode
     
     
     
@@ -210,32 +212,47 @@ struct EvaluationView: View {
                                             Spacer()
                                             
                                             HStack {
-                                                Button {
-                                                    selectedLectureID = lecture.id
-                                                    if lecture.nickname == userData.nickname {
-                                                        MoveReSave = true
+                                                if userData.nickname == lecture.nickname {
+                                                    Spacer()
+                                                    /**삭제버튼**/
+                                                    Button {
                                                         getLecture(id: lecture.id)
-                                                        print(resaveLecture)
-                                                        print("이 위에 나와야해")
-                                                    } else {
-                                                        MoveReSave = false
-                                                        ReSaveShowAlert = true // alert를 띄우기 위한 변수 추가
+                                                        MoveReSave = true
+    //                                                    selectedLectureID = lecture.id
+    //                                                    if lecture.nickname == userData.nickname {
+    //                                                        MoveReSave = true
+    //                                                        getLecture(id: lecture.id)
+    //                                                    } else {
+    //                                                        MoveReSave = false
+    //                                                        ReSaveShowAlert = true // alert를 띄우기 위한 변수 추가
+    //                                                    }
+                                                    } label: {
+                                                        Image(systemName: "square.and.pencil")
+                                                            .resizable()
+                                                            .aspectRatio(contentMode: .fit)
+                                                            .padding(.bottom, 5)
+                                                            .foregroundColor(Color(hex: 0xC28D8D))
+                                                            .padding(.trailing, 15)
+                                                            .frame(width: 50, height: 35)
                                                     }
-                                                } label: {
-                                                    Text("수정하기")
-                                                        .font(.system(size: 15))
-                                                        .foregroundColor(.red)
+                                                    .onTapGesture {
+                                                        selectedLectureID = lecture.id
+                                                        isMoveViewPresented = true // present될 view가 있음을 알리는 변수 값 변경
+                                                    }
+                                                    .sheet(isPresented: $MoveReSave, content: {
+                                                        re_save(resaveLectures: resaveLecture, save_id: selectedLectureID)
+                                                    })
+    //
+    //                                                .alert(isPresented: $ReSaveShowAlert, content: {
+    //                                                    Alert(title: Text("수정 실패!"), message: Text("해당 글의 수정 접근 권한이 없습니다."), dismissButton: .default(Text("확인")))
+    //                                                })
+                                                    
                                                 }
-                                                .alert(isPresented: $ReSaveShowAlert, content: {
-                                                    Alert(title: Text("수정 실패!"), message: Text("해당 글의 수정 접근 권한이 없습니다."), dismissButton: .default(Text("확인")))
-                                                })
-                                                .onTapGesture {
-                                                    selectedLectureID = lecture.id
-                                                    isMoveViewPresented = true // present될 view가 있음을 알리는 변수 값 변경
+                                                else {
+                                                    Text("")
                                                 }
-                                                .sheet(isPresented: $MoveReSave, content: {
-                                                    re_save(resaveLectures: resaveLecture ?? nil, save_id: selectedLectureID)
-                                                })
+                                                
+                                                
                                             }
                                             
                                             Button {

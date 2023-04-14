@@ -1,9 +1,3 @@
-//
-//  CurriculumDataStructureView.swift
-//  SKHUAZ
-//
-//  Created by 문인호 on 2023/04/13.
-//
 import SwiftUI
 
 struct CurriculumDataStructureView: View {
@@ -30,7 +24,7 @@ struct CurriculumDataStructureView: View {
                                 }
                                 HStack{
                                     Spacer().frame(width: 40, height: 10)
-                                    Text("웹개발입문 > ")
+                                    Text("자바프로그래밍 > 자료구조")
                                         .font(.system(size: 10))
                                         .padding()
                                 }

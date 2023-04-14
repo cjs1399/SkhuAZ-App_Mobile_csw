@@ -167,11 +167,15 @@ struct authView: View {
                 .background(Color(uiColor: .secondarySystemBackground))
                 .cornerRadius(10)
                 .keyboardType(.emailAddress)
+                .autocapitalization(.none) // 자동으로 대문자 설정 안하기
+                .disableAutocorrection(true) // 자동완성 끄기
             SecureField("비밀번호를 입력해주세요", text: $password)
                 .padding()
                 .frame(width: 350, height: 50)
                 .background(Color(uiColor: .secondarySystemBackground))
                 .cornerRadius(10)
+                .autocapitalization(.none) // 자동으로 대문자 설정 안하기
+                .disableAutocorrection(true) // 자동완성 끄기
             Button(action: {
                 if userData.email == email{
                     LoginStatus()

@@ -41,6 +41,7 @@ struct SignUpView: View {
     
     @State var signup_onoff: Bool = false
     
+    @State var signup_alert: Bool = false
     
     let SelectedMajor1 = [
         "소프트웨어공학",
@@ -691,7 +692,7 @@ struct SignUpView: View {
                 }.padding(.bottom, 30)
                 Spacer()
                 Button(action: {
-                    if email != "" && password != "" && RepeatedPassword != "" && Nickname != ""{
+                    if email != "" && password != "" && RepeatedPassword != "" && Nickname != "" && real_emailSuccess == true{
                         
                         let parameters: [String: Any] = ["email": email, "password": password, "checkpassword": RepeatedPassword, "nickname": Nickname, "graduate": graduate, "major1": major1, "major2": major2, "department": department, "major_minor": major_minor, "double_major": double_major, "semester": Semester]
                         print("회원가입 parameters : \(parameters)")
@@ -714,7 +715,7 @@ struct SignUpView: View {
                         signup_onoff = true
                         presentationMode.wrappedValue.dismiss()
                     } else {
-                        print("조건을 모두 입력하여주세요.")
+                        print("이메일 인증 혹은 조건을 모두 입력하여주세요.")
                     }
                     
                     NavigationLink(destination: LoginView(), isActive: $signup_onoff) {
