@@ -8,7 +8,8 @@
 import Foundation
 import SwiftUI
 
-struct Major_Box: View {    var body: some View {
+struct Major_Box: View {
+    var body: some View {
         
         ScrollView(.horizontal,showsIndicators: false, content: {
             Rectangle().fill(Color.white)

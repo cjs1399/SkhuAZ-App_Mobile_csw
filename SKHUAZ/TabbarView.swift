@@ -40,7 +40,7 @@ struct TabbarView: View {
                   Text("루트추천")
               }
               .tag(4)
-            SettingView()
+            SettingView(email: $userData.email, password: $userData.password)
                 .navigationBarBackButtonHidden(true)
                 .navigationBarHidden(true)
               .tabItem {

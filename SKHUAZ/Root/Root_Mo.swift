@@ -134,12 +134,12 @@ struct Root_Mo : View{
                                     }
                                 })
                             
-                            TextField("여기에 대충 안내문", text: $recommendation)
+                            TextEditor(text: $recommendation)
                                 .alignmentGuide(.leading) { d in d[.leading] }
                                 .font(.system(size: 15))
                                 .padding(.bottom, 90)
-                                .frame(width: 350, height: 160)
-                                .background(Color(hex: 0xEFEFEF))
+                                .frame(width: 350, height: 220)
+//                                .background(Color(hex: 0xEFEFEF))
                                 .cornerRadius(10)
                             
                             

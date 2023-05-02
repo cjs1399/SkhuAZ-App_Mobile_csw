@@ -90,7 +90,7 @@ struct re_save: View{
                             .cornerRadius(10)
                             .overlay(content: {
                                 HStack {
-                                    Menu("\(classYear) (년)") {
+                                    Menu("\(classYear)(년)") {
                                         Button("2018년") {
                                             classYear = 2018
                                         }
@@ -111,12 +111,11 @@ struct re_save: View{
                                         }
                                         
                                     }
+                                    .lineLimit(1)
                                     .foregroundColor(Color(hex: 0x9AC1D1)) //글씨색
                                     .font(.system(size: 12))
                                     .fontWeight(.semibold)
                                     .cornerRadius(10)
-                                    //                                                .padding()
-                                    //                                                .frame(width: 10, height: 50)
                                     
                                 }
                             })
@@ -173,12 +172,9 @@ struct re_save: View{
                                             .cornerRadius(10)
                                     }
                                 }
-                                
-//                                .lineLimit(nil)
-//                                          .multilineTextAlignment(.center)
+                         
                             }
-//                            .lineLimit(nil)
-//                                      .multilineTextAlignment(.center)
+                           
                         })
                         .padding(.bottom, 20)
                     
@@ -308,14 +304,14 @@ struct re_save: View{
                         }
                     }.padding(.bottom,20)
                     
-                                            HStack {
-                                                TextField("\(review)", text: $review)
-                                                    .foregroundColor(Color.black)
-                                                    .font(.system(size: 15))
-                                                    .lineSpacing(5) //줄 간격
-                                                    .multilineTextAlignment(.center)
-                                                    .fixedSize(horizontal: false, vertical: true)
-                                            }
+                    TextEditor(text: $review)
+                        .foregroundColor(Color.black)
+                        .font(.system(size: 15))
+                        .lineSpacing(5) //줄 간격
+                        .padding()
+                        .frame(height: 150)
+                    
+                    
                 }
                 //전체 큰 네모박스
                 .padding()
@@ -390,7 +386,7 @@ struct re_save: View{
             }
         }//스크롤
         .onAppear() {
-        lectureName = resaveLectures.lectureName
+            lectureName = resaveLectures.lectureName
             prfsName = resaveLectures.prfsName
             classYear = resaveLectures.classYear
             semester = resaveLectures.semester

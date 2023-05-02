@@ -14,7 +14,8 @@ struct SettingView: View {
     @EnvironmentObject var userData: UserData
     @State private var isactive:Bool = false
     @State var loginSuccess = RestAPI.LogineSuccess
-    
+    @Binding var email: String
+    @Binding var password: String
     
     var body: some View {
         NavigationView{
@@ -60,6 +61,8 @@ struct SettingView: View {
                         }
                     }
                     self.presentationMode.wrappedValue.dismiss()
+                    self.email = ""
+                    self.password = ""
                 }) {
                     HStack{
                         Image("logout1")
